@@ -3,10 +3,11 @@ public class Character {
     private int suspicionLevel;
     private boolean isKiller;
     private boolean isAlive;
+    private boolean isChild;
 
-    public Character(String name, boolean isKiller){
+    public Character(String name, boolean isChild){
         this.name = name;
-        this.isKiller = isKiller;
+        this.isChild = isChild;
         this.suspicionLevel = 0;
         this.isAlive = true;
     }
@@ -27,6 +28,6 @@ public class Character {
     public void setAlive(boolean alive){
         this.isAlive = alive;
     }
-
-
+    public boolean getIsChild(){
+        return isChild;
 }
