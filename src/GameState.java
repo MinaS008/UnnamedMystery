@@ -8,7 +8,7 @@ public class GameState {
         Character mother = new Character("Mother", false);
         Character father = new Character("Father", false);
         Character olderSister = new Character("Older sister", false);
-        Character littleBrother = new Character("Little brother", false);
+        Character littleBrother = new Character("Little brother", true);
         Character uncle = new Character("Uncle", false);
         Character cousin = new Character("Cousin", false);
         Character familyFriend = new Character("Family friend", false);
