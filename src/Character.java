@@ -27,4 +27,6 @@ public class Character {
     public void setAlive(boolean alive){
         this.isAlive = alive;
     }
+
+
 }

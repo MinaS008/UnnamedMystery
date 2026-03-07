@@ -1,14 +1,16 @@
 import java.util.ArrayList;
+import java.util.*;
 
 public class GameState {
     private ArrayList<Character> characters;
 
     public GameState(){
         characters = new ArrayList<>();
+        
         Character mother = new Character("Mother", false);
         Character father = new Character("Father", false);
         Character olderSister = new Character("Older sister", false);
-        Character littleBrother = new Character("Little brother", false);
+        Character littleBrother = new Character("Little brother", true);
         Character uncle = new Character("Uncle", false);
         Character cousin = new Character("Cousin", false);
         Character familyFriend = new Character("Family friend", false);
@@ -18,8 +20,24 @@ public class GameState {
         characters.add(uncle);
         characters.add(olderSister);
         characters.add(littleBrother);
-        characters.add(uncle);
         characters.add(cousin);
         characters.add(familyFriend);
+    }
+
+    public void assignRandomKiller(Character playerCharacter) {
+        Random rand = new Random();
+        Character killer;
+
+        do {
+            int index = rand.nextInt(characters.size());
+            killer = characters.get(index);
+        } while (killer == playerCharacter || killer.getName().equals("Little brother"));
+
+        killer.setKiller(true);
+        System.out.println("DEBUG: Killer is " + killer.getName());
+    }
+
+    public ArrayList<Character> getCharacters() {
+        return characters;
     }
 }
