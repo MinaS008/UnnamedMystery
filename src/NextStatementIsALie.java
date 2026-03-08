@@ -327,7 +327,7 @@ public class NextStatementIsALie {
         if (choice.getRequiredItem() != null && !hasItem(choice.getRequiredItem())) {
             return false;
         }
-        if (choice.getRequiredCharacter() != null && choice.getRequiredCharacter != toCharacterName(playableCharacter)) {
+        if (choice.getRequiredCharacter() != null && choice.getRequiredCharacter() != toCharacterName(playableCharacter)) {
             return false;
         }
 
