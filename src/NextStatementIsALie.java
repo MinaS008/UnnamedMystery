@@ -66,6 +66,16 @@ public class NextStatementIsALie {
     }
 
     //Randomize Killer
+    private Character randomizedKiller() {
+        List<Character> possibleKillers = new ArrayList<>();
+        for (Map.Entry<String, Character> entry : characters.entrySet()) {
+            String name = entry.getKey();
+            Character c = entry.getValue();
+            // Exclude player and Younger Brother from being killer
+            if (!name.equals(playerCharacter.getName()) && !name.equals(\"Younger Brother\")) {
+                    potentialKillers.add(name);
+        }
+    }
 
 
     public void startGame() {
