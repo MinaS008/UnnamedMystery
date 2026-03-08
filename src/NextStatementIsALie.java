@@ -36,7 +36,7 @@ public class NextStatementIsALie {
     private int dangerLevel;
     private boolean finalGatheringTriggered;
     private Set<characterNames> deadCharacters;
-    private List<GameListener> listeners;
+    private List<gameListener> listeners;
 
     //Constructor
     public NextStatementIsALie(Map<String, Scene> sceneRegistry) {
@@ -55,13 +55,13 @@ public class NextStatementIsALie {
 
     private Map<characterNames, Character> buildCharacters() {
         Map<characterNames, Character> map = new LinkedHashMap<>();
-        map.put(characterNames.mother, new Character(characterNames.mother, "Mother", 0));
-        map.put(characterNames.father, new Character(characterNames.father, "Father", 0));
-        map.put(characterNames.olderSister, new Character(characterNames.olderSister, "Older sister", 0));
-        map.put(characterNames.littleBrother, new Character(characterNames.littleBrother, "Little brother", 0));
-        map.put(characterNames.uncle, new Character(characterNames.uncle, "Uncle", 0));
-        map.put(characterNames.cousin, new Character(characterNames.cousin, "Cousin", 0));
-        map.put(characterNames.familyFriend, new Character(characterNames.familyFriend, "Family Friend", 0));
+        map.put(characterNames.mother, new Character( "Mother", false));
+        map.put(characterNames.father, new Character( "Father", false));
+        map.put(characterNames.olderSister, new Character( "Older sister", false));
+        map.put(characterNames.littleBrother, new Character("Little brother", false));
+        map.put(characterNames.uncle, new Character("Uncle", false));
+        map.put(characterNames.cousin, new Character("Cousin", false));
+        map.put(characterNames.familyFriend, new Character("Family Friend", false));
         return map;
     }
 
@@ -132,7 +132,7 @@ public class NextStatementIsALie {
     //Scene effects
     public void applySceneEffects(Scene scene) {
         //This is for adding to the inventory
-        for (String itemID : scene.getInventroyAdds()) {
+        for (String itemID : scene.getInventoryAdds.()) {
             addToInventory(itemID);
         }
 
@@ -253,17 +253,16 @@ public class NextStatementIsALie {
 
     public List<characterNames> getAliveCharacters() {
         List<characterNames> alive = new ArrayList<>();
-        for (Map.Entry<characterNames, Character> entry : characters.entrySet()) {
-            if (entry.getValue().isAlive()) {
-                alive.add(entry.getKey());
+        for (characterNames name: characters.keySet()) {
+            if(!deadCharacters.contains(name)) {
+                alive.add(name);
             }
         }
         return Collections.unmodifiableList(alive);
     }
 
     private void checkEveryoneDead() {
-        long aliveCount = characters.values().stream().filter(Character::isAlive).count();
-        if (aliveCount <= 1) {
+        if(deadCharacters.size() >= characters.size() - 1) {
             triggerEnding(endingType.everyoneDead);
         }
     }
@@ -314,7 +313,13 @@ public class NextStatementIsALie {
     //Ending
     private void triggerEnding(endingType type) {
         this.endingType = type;
-        this.gameState = type == endingType.wrongGuess || type == endingType.correctGuessTooLate ? gameState.gameOverLose ? gameState.gameOverWin;
+        if(type == endingType.wrongGuess
+           || type == endingType.correctGuessTooLate
+           || type == endingType.everyoneDead) {
+            this.gameState = gameState.gameOverLose;
+           } else {
+            this.gameState = gameState.gameOverWin;
+           }
         notifyListeners(gameEvent.gameEnded);
     }
 
@@ -322,7 +327,7 @@ public class NextStatementIsALie {
         if (choice.getRequiredItem() != null && !hasItem(choice.getRequiredItem())) {
             return false;
         }
-        if (choice.getRequiredCharacter() != null && !choice.getRequiredCharacte.toString().equals(playableCharacter.toString())) {
+        if (choice.getRequiredCharacter() != null && choice.getRequiredCharacter != toCharacterName(playableCharacter)) {
             return false;
         }
 
@@ -394,7 +399,7 @@ public class NextStatementIsALie {
 
     public String getCharacterDisplayName(characterNames name) {
         Character c = characters.get(name);
-        return (c != null) ? c.getDisplayName() : name.toString();
+        return (c != null) ? c.getName() : name.toString();
     }
 
     public int getMinCluesRequired() {
@@ -407,7 +412,7 @@ public class NextStatementIsALie {
     }
 
     public interface gameListener {
-        void onGameEvent(gameEvent event, Game game);
+        void onGameEvent(gameEvent event, GameState game);
     }
 
 
