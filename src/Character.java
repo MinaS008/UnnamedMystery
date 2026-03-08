@@ -28,5 +28,8 @@ public class Character {
         this.isAlive = alive;
     }
 
+    public void setKiller(boolean isKiller) {
+        this.isKiller = isKiller;
+    }
 
 }
