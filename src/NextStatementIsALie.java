@@ -43,7 +43,7 @@ public class NextStatementIsALie {
     public NextStatementIsALie(Map<String, Scene> sceneRegistry) {
         this.sceneRegistry = Collections.unmodifiableMap(sceneRegistry);
         this.characters = buildCharacters();
-        this.killer = randomizeKiller();
+        this.killer = null;
         this.inventory = new ArrayList<>();
         this.deadCharacters = new HashSet<>();
         this.listeners = new ArrayList<>();
@@ -68,13 +68,13 @@ public class NextStatementIsALie {
 
     //Randomize Killer
     private Character randomizeKiller(playableCharacter chosenCharacter) {
-        List<Character> possibleKillers = new ArrayList<>(Arrays.asList(
-                characters.get(characterNames.mother),
-                characters.get(characterNames.father),
-                characters.get(characterNames.olderSister),
-                characters.get(characterNames.uncle),
-                characters.get(characterNames.cousin),
-                characters.get(characterNames.familyFriend)
+        List<characterNames> possibleKillers = new ArrayList<>(Arrays.asList(
+                characterNames.mother,
+                characterNames.father,
+                characterNames.olderSister,
+                characterNames.uncle,
+                characterNames.cousin,
+                characterNames.familyFriend
             ));
 
         //Remove player's chaarcter
@@ -133,7 +133,7 @@ public class NextStatementIsALie {
     //Scene effects
     public void applySceneEffects(Scene scene) {
         //This is for adding to the inventory
-        for (String itemID : scene.getInventoryAdds.()) {
+        for (String itemID : scene.getInventoryAdds()) {
             addToInventory(itemID);
         }
 
@@ -143,6 +143,7 @@ public class NextStatementIsALie {
         }
 
         //This is to apply killer-conditional changes
+        characterNames killerKey = null;
         for (Scene.KillerConditionalEffect effect : scene.getKillerConditionalEffects()) {
             if (killerKey == effect.getKillerName()) {
                 adjustSuspicion(effect.getTargetCharacter(), effect.getSuspicion());
@@ -151,7 +152,7 @@ public class NextStatementIsALie {
         }
 
         //Apply danger level changes
-        dangerLevel = Math.min(maxDanger, Math.max(0, dangerLevel + scene.getDanger()));
+        dangerLevel = Math.min(maxDanger, Math.max(0, dangerLevel + scene.getDangerDelta()));
 
         //Kill characters if the scene specifies it
         for (characterNames victim : scene.getCharacterDeaths()) {
@@ -178,8 +179,8 @@ public class NextStatementIsALie {
 
     public Map<characterNames, Integer> getAllSuspicionScores() {
         Map<characterNames, Integer> scores = new LinkedHashMap<>();
-        for (Map.Entry<characterNames, Character> entry : characterNames.entrySet()) {
-            scores.put(entry.getKey(), entry.getValue().getSuspicionLevel();
+        for (Map.Entry<characterNames, Character> entry : characters.entrySet()) {
+            scores.put(entry.getKey(), entry.getValue().getSuspicionLevel());
         }
         return Collections.unmodifiableMap(scores);
     }
@@ -202,20 +203,27 @@ public class NextStatementIsALie {
 
     //Returns how many clues actually implicate the killer
     public int getIncriminatingClueCount() {
+        characterNames killerKey = null;
+        for(Map.Entry<characterNames, Character> entry : characters.entrySet()) {
+            if (entry.getValue() == killer) {
+                killerKey = entry.getKey();
+                break;
+            }
+        }
+        if(killerKey == null) return 0;
         int count = 0;
         for (String itemID : inventory) {
             Clue clue = Clue.getByClueID(itemID);
-            if (clue != null && clue.implicates(killer.getName())) {
+            if (clue != null && clue.implicates(killerKey)) {
                 count++;
             }
         }
         return count;
-        ;
     }
 
     //Guess - Accusation System
     public void processGuess(characterNames accused) {
-        boolean correct = (accused == killer.getName());
+        boolean correct = (characters.get(accused) == killer);
 
         if (correct) {
             handleCorrectGuess();
