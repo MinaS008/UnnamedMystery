@@ -25,7 +25,7 @@ public class NextStatementIsALie {
     private static final int minCluesToAccuse = 2;
 
     private gameState gameState;
-    private endingType endingType;
+    private endingType endingType; 
     private Character killer;
     private playableCharacter playableCharacter;
     private Map<characterNames, Character> characters;
@@ -66,17 +66,30 @@ public class NextStatementIsALie {
     }
 
     //Randomize Killer
-    private Character randomizedKiller() {
-        List<Character> possibleKillers = new ArrayList<>();
-        for (Map.Entry<String, Character> entry : characters.entrySet()) {
-            String name = entry.getKey();
-            Character c = entry.getValue();
-            // Exclude player and Younger Brother from being killer
-            if (!name.equals(playerCharacter.getName()) && !name.equals(\"Younger Brother\")) {
-                    potentialKillers.add(name);
-        }
+    private Character randomizeKiller(playableCharacter chosenCharacter) {
+        List<Character> possibleKillers = new ArrayList<>(Arrays.asList(
+                characterNames.mother,
+                characters.get(characterNames.father),
+                characters.get(characterNames.olderSister),
+                characters.get(characterNames.uncle),
+                characters.get(characterNames.cousin),
+                characters.get(characterNames.familyFriend)
+            ));
+
+        //Remove player's chaarcter
+        possibleKillers.remove(toCharacterName(chosenCharacter));
+
+        Collections.shuffle(possibleKillers);
+        return characters.get(possibleKillers.get(0));
     }
 
+    private characterNames toCharacterName(playableCharacter pc) {
+        switch(pc) {
+            case olderSister: return characterNames.olderSister;
+            case familyFriend: return characterNames.familyFriend;
+            default: throw new IllegalArgumentException("Unknown playable character: " + pc);
+        }
+    }
 
     public void startGame() {
         gameState = gameState.characterSelect;
@@ -85,6 +98,8 @@ public class NextStatementIsALie {
 
     public void selectCharacter(playableCharacter chosen) {
         this.playableCharacter = chosen;
+        this.killer = randomizeKiller(chosen);
+        this.killer.setKiller(true);
         gameState = gameState.exploring;
         loadScene("Opening Scene");
         notifyListeners(gameEvent.characterSelected);
@@ -178,7 +193,7 @@ public class NextStatementIsALie {
     }
 
     public List<String> getInventory() {
-        return Collections.unmodifiableMap(inventory);
+        return Collections.unmodifiableList(inventory);
     }
 
     //Returns how many clues actually implicate the killer
