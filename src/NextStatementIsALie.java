@@ -27,6 +27,7 @@ public class NextStatementIsALie {
     private gameState gameState;
     private endingType endingType; 
     private Character killer;
+    private boolean killerLocked = false;
     private playableCharacter playableCharacter;
     private Map<characterNames, Character> characters;
     private Scene currentScene;
@@ -68,7 +69,7 @@ public class NextStatementIsALie {
     //Randomize Killer
     private Character randomizeKiller(playableCharacter chosenCharacter) {
         List<Character> possibleKillers = new ArrayList<>(Arrays.asList(
-                characterNames.mother,
+                characters.get(characterNames.mother),
                 characters.get(characterNames.father),
                 characters.get(characterNames.olderSister),
                 characters.get(characterNames.uncle),
@@ -142,8 +143,8 @@ public class NextStatementIsALie {
         }
 
         //This is to apply killer-conditional changes
-        for (Scene.getKillerConditionalEffect effect : scene.getKillerConditionalEffects()) {
-            if (killer.getName() == effect.getKillerName()) {
+        for (Scene.KillerConditionalEffect effect : scene.getKillerConditionalEffects()) {
+            if (killerKey == effect.getKillerName()) {
                 adjustSuspicion(effect.getTargetCharacter(), effect.getSuspicion());
                 dangerLevel = Math.min(maxDanger, dangerLevel + effect.getDanger());
             }
@@ -162,20 +163,23 @@ public class NextStatementIsALie {
     public void adjustSuspicion(characterNames name, int num) {
         Character c = characters.get(name);
         if (c == null) return;
-        int newValue = Math.min(maxSuspicion, Math.max(0, c.getSuspicion() + num));
-        c.setSuspicion(newValue);
+        int current = c.getSuspicionLevel();
+        int capped = Math.min(num, maxSuspicion - current);
+        if (capped > 0) {
+            c.increaseSuspicionLevel(capped);
+        }
         notifyListeners(gameEvent.suspicionChanged);
     }
 
     public int getSuspicion(characterNames name) {
         Character c = characters.get(name);
-        return (c != null) ? c.getSuspicion() : 0;
+        return (c != null) ? c.getSuspicionLevel() : 0;
     }
 
     public Map<characterNames, Integer> getAllSuspicionScores() {
         Map<characterNames, Integer> scores = new LinkedHashMap<>();
         for (Map.Entry<characterNames, Character> entry : characterNames.entrySet()) {
-            scores.put(entry.getKey(), entry.getValue().getSuspicion);
+            scores.put(entry.getKey(), entry.getValue().getSuspicionLevel();
         }
         return Collections.unmodifiableMap(scores);
     }
