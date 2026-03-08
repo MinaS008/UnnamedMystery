@@ -412,7 +412,7 @@ public class NextStatementIsALie {
     }
 
     public interface gameListener {
-        void onGameEvent(gameEvent event, GameState game);
+        void onGameEvent(gameEvent event, NextStatementIsALie game);
     }
 
 
