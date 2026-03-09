@@ -143,16 +143,15 @@ public class NextStatementIsALie {
         }
 
         //This is to apply killer-conditional changes
-        characterNames killerKey = null;
         for (Scene.KillerConditionalEffect effect : scene.getKillerConditionalEffects()) {
-            if (killerKey == effect.getKillerName()) {
+            if (killer.getName() == effect.getKillerName()) {
                 adjustSuspicion(effect.getTargetCharacter(), effect.getSuspicion());
                 dangerLevel = Math.min(maxDanger, dangerLevel + effect.getDanger());
             }
         }
 
         //Apply danger level changes
-        dangerLevel = Math.min(maxDanger, Math.max(0, dangerLevel + scene.getDangerDelta()));
+        dangerLevel = Math.min(maxDanger, Math.max(0, dangerLevel + scene.getDangerLevel()));
 
         //Kill characters if the scene specifies it
         for (characterNames victim : scene.getCharacterDeaths()) {
