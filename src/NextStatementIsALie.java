@@ -56,13 +56,13 @@ public class NextStatementIsALie {
 
     private Map<characterNames, Character> buildCharacters() {
         Map<characterNames, Character> map = new LinkedHashMap<>();
-        map.put(characterNames.mother, new Character( "Mother", false));
-        map.put(characterNames.father, new Character( "Father", false));
-        map.put(characterNames.olderSister, new Character( "Older sister", false));
-        map.put(characterNames.littleBrother, new Character("Little brother", false));
-        map.put(characterNames.uncle, new Character("Uncle", false));
-        map.put(characterNames.cousin, new Character("Cousin", false));
-        map.put(characterNames.familyFriend, new Character("Family Friend", false));
+        map.put(characterNames.mother, new Character( characterNames.mother, "Mother", 0));
+        map.put(characterNames.father, new Character(characterNames.father, "Father", 0));
+        map.put(characterNames.olderSister, new Character(characterNames.olderSister,"Older sister", 0));
+        map.put(characterNames.littleBrother, new Character(characterNames.littleBrother, "Little brother", 0));
+        map.put(characterNames.uncle, new Character(characterNames.uncle, "Uncle", 0));
+        map.put(characterNames.cousin, new Character(characterNames.cousin, "Cousin", 0));
+        map.put(characterNames.familyFriend, new Character(characterNames.familyFriend ,"Family Friend", 0));
         return map;
     }
 
@@ -77,7 +77,7 @@ public class NextStatementIsALie {
                 characterNames.familyFriend
             ));
 
-        //Remove player's chaarcter
+        //Remove player's character
         possibleKillers.remove(toCharacterName(chosenCharacter));
 
         Collections.shuffle(possibleKillers);
@@ -404,14 +404,14 @@ public class NextStatementIsALie {
 
     public String getKillerReveal() {
         if (gameState == gameState.gameOverWin || gameState == gameState.gameOverLose) {
-            return killer.getName();
+            return killer.getDisplayName();
         }
         throw new IllegalArgumentException("Killer identity not available until the game ends.");
     }
 
     public String getCharacterDisplayName(characterNames name) {
         Character c = characters.get(name);
-        return (c != null) ? c.getName() : name.toString();
+        return (c != null) ? c.getDisplayName() : name.toString();
     }
 
     public int getMinCluesRequired() {

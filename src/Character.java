@@ -1,35 +1,61 @@
 public class Character {
-    private String name;
+    private NextStatementIsALie.characterNames name;
+    private String displayName;
     private int suspicionLevel;
+    private boolean alive;
     private boolean isKiller;
-    private boolean isAlive;
 
-    public Character(String name, boolean isKiller){
+    public Character(NextStatementIsALie.characterNames name, String displayName, int startingSuspicion){
         this.name = name;
-        this.isKiller = isKiller;
-        this.suspicionLevel = 0;
-        this.isAlive = true;
+        this.displayName = displayName;
+        this.suspicionLevel = startingSuspicion;
+        this.alive = true;
+        this.isKiller = false;
     }
 
-    public String getName(){
-        return name;
-    }
     public int getSuspicionLevel(){
         return suspicionLevel;
     }
+
     public void increaseSuspicionLevel(int amount){
         suspicionLevel += amount;
     }
 
-    public boolean getIsKiller(){
-        return isKiller;
-    }
-    public void setAlive(boolean alive){
-        this.isAlive = alive;
+    public void decreaseSuspicionLevel(int amount){
+        suspicionLevel = Math.max(0, suspicionLevel - amount);
     }
 
-    public void setKiller(boolean isKiller) {
+    public void setSuspicionLevel(int value){
+        suspicionLevel = Math.max(0, value);
+    }
+
+    public boolean isAlive(){
+        return alive;
+    }
+
+    public void setAlive(boolean alive){
+        this.alive = alive;
+    }
+
+    public boolean isKiller(){
+        return isKiller;
+    }
+
+    public void setKiller(boolean isKiller){
         this.isKiller = isKiller;
     }
+
+    public NextStatementIsALie.characterNames getName(){
+        return name;
+    }
+
+    public String getDisplayName(){
+        return displayName;
+    }
+
+    public String toString(){
+        return displayName + " | Suspicion: " + suspicionLevel + " | Alive: " + alive + (isKiller ? " | *** KILLER *** |" : "");
+    }
+
 
 }
