@@ -127,7 +127,7 @@ public class NextStatementIsALie {
             return;
         }
 
-        loadScene(choice.getTargetSceneID());
+        loadScene(choice.getTargetSceneId());
     }
 
     //Scene effects
