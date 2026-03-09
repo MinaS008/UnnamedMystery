@@ -52,7 +52,7 @@ public class Scene {
     public Map<NextStatementIsALie.characterNames, Integer> getSuspicionChanges(){
         return suspicionChanges;
     }
-    public List<KillerConditionalEffects> getKillerConditionalEffects(){
+    public List<Clue.KillerConditionalEffect> getKillerConditionalEffects(){
         return killerConditionalEffects;
     }
     public List<NextStatementIsALie.characterNames> getCharacterDeaths(){
@@ -85,7 +85,7 @@ public class Scene {
         private List<String> inventoryAdds = new ArrayList<>();
 
         private Map<NextStatementIsALie.characterNames, Integer> suspicionChanges = new LinkedHashMap<>();
-        private List<KillerConditionalEffect> killerConditionalEffects = new ArrayList<>(); //Clue reference
+        private List<Clue.KillerConditionalEffect> killerConditionalEffects = new ArrayList<>(); //Clue reference
         private int dangerLevel = 0;
 
         private List<NextStatementIsALie.characterNames> characterDeaths = new ArrayList<>();
