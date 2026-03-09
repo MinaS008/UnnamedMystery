@@ -8,10 +8,10 @@ public class Clue {
     private int dangerLevel;
 
     public KillerConditionalEffect(NextStatementIsALie.characterNames killerName, NextStatementIsALie.characterNames targetCharacter, int suspicionLevel, int dangerLevel) {
-      this.killerName;
-      this.targetCharacter;
-      this.suspicionLevel;
-      this.dangerLevel;
+      this.killerName = killerName;
+      this.targetCharacter = targetCharacter;
+      this.suspicionLevel = suspicionLevel;
+      this.dangerLevel = dangerLevel;
     }
 
     public NextStatementIsALie.characterNames getKillerName() {
