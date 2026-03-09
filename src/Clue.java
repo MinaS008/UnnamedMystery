@@ -1,6 +1,35 @@
 import java.util.*;
 
 public class Clue {
+  public static class KillerConditionalEffect {
+    private NextStatementIsALie.characterNames killerName;
+    private NextStatementIsALie.characterNames targetCharacter;
+    private int suspicionLevel;
+    private int dangerLevel;
+
+    public KillerConditionalEffect(NextStatementIsALie.characterNames killerName, NextStatementIsALie.characterNames targetCharacter, int suspicionLevel, int dangerLevel) {
+      this.killerName;
+      this.targetCharacter;
+      this.suspicionLevel;
+      this.dangerLevel;
+    }
+
+    public NextStatementIsALie.characterNames getKillerName() {
+      return killerName;
+    }
+
+    public NextStatementIsALie.characterNames getTargetCharacter() {
+      return targetCharacter;
+    }
+
+    public int getSuspicionLevel() {
+      return suspicionLevel;
+    }
+
+    public int getDangerLevel() {
+      return dangerLevel;
+    }
+  }
   private static Map<String, Clue> registry = new LinkedHashMap<>();
   static {}
 
