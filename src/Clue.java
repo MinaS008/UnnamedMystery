@@ -10,7 +10,7 @@ public class Clue {
 
   private String clueID;
   private String description;
-  private NextStatementIsALie.characterNames implicateCharacter;
+  private NextStatementIsALie.characterNames implicatedCharacter;
   private int suspicionLevel;
 
   private Clue(String clueID, String description, NextStatementIsALie.characterNames implicateCharacter, int suspicionLevel) {
