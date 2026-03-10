@@ -33,6 +33,46 @@ public class Clue {
   private static Map<String, Clue> registry = new LinkedHashMap<>();
     static {
         //Older Sister clues
+              register("bloodyKnife",
+                "A kitchen knife smeared with dark residue. Someone was in here.",
+                NextStatementIsALie.characterNames.mother, 2);
+        register("pantryNote",
+                "A crumpled note: 'No wound was carved -the silent killer made it rise alone.' Posion.",
+                NextStatementIsALie.characterNames.father, 2);
+        register("brokenWineGlass",
+                "A shattered wine glass in the cellar. The uncle never lets anyone touch his collection.",
+                NextStatementIsALie.characterNames.uncle, 2);
+        register("almondScent",
+                "A bitter almond smell from a forced-open box. Granfather was allergic to almonds.",
+                NextStatementIsALie.characterNames.father, 2);
+        register("footprintPhoto",
+                "A muddy footprint near a hidden tunnel. SOmeone used a secret exit - or entrance.",
+                NextStatementIsALie.characterNames.uncle, 2);
+        register("inconsistencyNote",
+                "The dirt on the floor is new. But it hasn't rained recently, so there is no dirt oustide.",
+                NextStatementIsALie.characterNames.uncle, 2);
+        register("revisedWIll",
+                "The handwritten amendment was added this morning. Someone changed it... It is very suspiciouss",
+                NextStatementIsALie.characterNames.father, 3);
+        register("tornEnvelope",
+                "A torn envelope on the grandfather's desk. Something was sent - or received - in secret.",
+                NextStatementIsALie.characterNames.cousin, 1);
+        register("allergyReport",
+                "AN official allergy report confirms a deathly reaction to almnonds.",
+                NextStatementIsALie.characterNames.mother, 1);
+        register("hiddenCash",
+                "A hidden stack of money behind the nursery crib. The family friend was near here earlier.",
+                NextStatementIsALie.characterNames.familyFriend, 2);
+        register("wardrobePoison",
+                "Poison hidden inside the nursery wardrobe. The cousin was seen opening it earlier.",
+                NextStatementIsALie.characterNames.cousin, 3);
+        register("burnedDocument",
+                "Piece up the document together and see that the name is bruned away",
+                NextStatementIsALie.characterNames.father, 1);
+        register("almondResidue",
+                "A velvet pouch hidden in the chimney containing almond shavings. Poison was staged here.",
+                NextStatementIsALie.characterNames.mother, 3);
+      
         //Family Friend clues
         register("handwrittenNote",
                 "A folded napkin note: 'He knew the truth. Now he doesn't breath.' Red-stained",
