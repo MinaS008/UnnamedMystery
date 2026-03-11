@@ -59,25 +59,6 @@ public class Scene {
         return characterDeaths;
     }
 
-    public static class killerConditionalEffect{
-        private NextStatementIsALie.characterNames killerName;
-        private NextStatementIsALie.characterNames targetCharacter;
-        private int suspicionLevel;
-        private int dangerLevel;
-
-        public killerConditionalEffect(NextStatementIsALie.characterNames killerName, NextStatementIsALie.characterNames targetCharacter, int suspicionLevel, int dangerLevel){
-            this.killerName = killerName;
-            this.targetCharacter = targetCharacter;
-            this.suspicionLevel = suspicionLevel;
-            this.dangerLevel = dangerLevel;
-        }
-
-        public NextStatementIsALie.characterNames getKillerName(){return killerName;}
-        public NextStatementIsALie.characterNames getTargetCharacter(){return targetCharacter;}
-        public int getSuspicionLevel(){return suspicionLevel;}
-        public int getDangerLevel(){return dangerLevel;}
-    }
-
     public static class Builder{
         private String sceneID;
         private String narrativeText;
@@ -92,7 +73,7 @@ public class Scene {
         private boolean triggersFinalGathering = false;
         private boolean isExitScene = false;
 
-        public Builder(String sceneId, String narrativeText){
+        public Builder(String sceneID, String narrativeText){
             this.sceneID = sceneID;
             this.narrativeText = narrativeText;
         }
@@ -132,6 +113,11 @@ public class Scene {
             return this;
         }
 
+        public Builder setTriggersFinalGathering(boolean value) {
+            triggersFinalGathering = value;
+            return this;
+        }
+
         public Scene build(){
             if(sceneID == null || sceneID.isBlank()){
                 throw new IllegalStateException("Scene must have a valid sceneID (non-empty).");
@@ -143,9 +129,12 @@ public class Scene {
         }
     }
 
-    public String toString(){
-        return "Scene[" + sceneID + "] choices = " + choices.size() + " items =" + inventoryAdds.size() + " danger= " + (dangerLevel >= 0 ? "+" : "");
+    public String toString() {
+        return "Scene[" + sceneID + "] choices=" + choices.size() +
+                " items=" + inventoryAdds.size() +
+                " danger=" + dangerLevel;
     }
+
 
     //FAMILY FRIEND
     Scene openSceneFriend = new Scene.Builder("OpenSceneForFriend",
@@ -224,6 +213,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.cousin, 0, 3
             ))
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene noActionOldSister = new Scene.Builder("NoActionOldSister",
@@ -275,6 +265,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.olderSister, 0, 2
             ))
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene askCousin = new Scene.Builder("AskCousin",
@@ -306,6 +297,7 @@ public class Scene {
                     "This becomes critical evidence at the final gathering.")
             .addInventorySystem("loginRecord842PM")
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene accuseFromLaptop = new Scene.Builder("AccuseFromLaptop",
@@ -334,6 +326,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.olderSister, 0, 3
             ))
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     //Attic Branch
@@ -394,6 +387,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.uncle, 0, 2
             ))
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene suspectFatherFaked = new Scene.Builder("SuspectFatherFaked",
@@ -407,6 +401,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.father, 0, 2
             ))
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene suspectMotherConfession = new Scene.Builder("SuspectMotherConfession",
@@ -420,6 +415,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.mother, 0, 2
             ))
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene inspectVial = new Scene.Builder("InspectVial",
@@ -448,6 +444,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.cousin, 0, 2
             ))
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene suspectSelf = new Scene.Builder("SuspectSelf",
@@ -456,6 +453,7 @@ public class Scene {
                     "You were the first person to find the body. You were very calm.\n\n" +
                     "You can accuse yourself at the final gathering — but that never ends well.")
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene suspectOlderSisterVial = new Scene.Builder("SuspectOlderSisterVial",
@@ -470,6 +468,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.olderSister, 0, 2
             ))
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene examineCloak = new Scene.Builder("ExamineCloak",
@@ -513,6 +512,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.mother, 0, 2
             ))
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene suspectUncleCloak = new Scene.Builder("SuspectUncleCloak",
@@ -526,6 +526,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.uncle, 0, 2
             ))
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene checkTrunk = new Scene.Builder("CheckTrunk",
@@ -548,6 +549,7 @@ public class Scene {
             .addInventorySystem("photoEvidence")
             .addSuspicionChange(NextStatementIsALie.characterNames.cousin, 1)
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
     Scene arguePhoto = new Scene.Builder("ArguePhoto",
             "The arguing photo is striking.\n" +
@@ -555,6 +557,7 @@ public class Scene {
                     "You may only press the emergency button if two other clues connect logically.")
             .addInventorySystem("arguingPhoto")
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene leaveTheTrunk = new Scene.Builder("LeaveTheTrunk",
@@ -588,6 +591,7 @@ public class Scene {
             .addSuspicionChange(NextStatementIsALie.characterNames.cousin, 1)
             .addSuspicionChange(NextStatementIsALie.characterNames.olderSister, 1)
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene takeThreatLetter = new Scene.Builder("TakeThreatLetter",
@@ -598,6 +602,7 @@ public class Scene {
             .addInventorySystem("threatLetterM")
             .addSuspicionChange(NextStatementIsALie.characterNames.mother, 2)
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene leaveLetters = new Scene.Builder("LeaveLetters",
@@ -705,6 +710,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.olderSister,
                     NextStatementIsALie.characterNames.olderSister, 1, 3))
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene escapeHallway = new Scene.Builder("EscapeHallway",
@@ -735,6 +741,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.olderSister,
                     NextStatementIsALie.characterNames.olderSister, 0, 4))
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene runFromHallway = new Scene.Builder("RunFromHallway",
@@ -854,12 +861,14 @@ public class Scene {
                     "If it was planted — the real killer may try to frame you.")
             .addInventorySystem("cufflinkKept")
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene leaveCufflink = new Scene.Builder("LeaveCufflink",
             "You leave the cufflink in place.\n" +
                     "You may later catch someone trying to retrieve it.")
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene followScrapeMarks = new Scene.Builder("FollowScrapeMarks",
@@ -883,6 +892,7 @@ public class Scene {
             .addSuspicionChange(NextStatementIsALie.characterNames.father, 1)
             .addSuspicionChange(NextStatementIsALie.characterNames.mother, 1)
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene standGround = new Scene.Builder("StandGround",
@@ -891,6 +901,7 @@ public class Scene {
                     "You cannot win through guessing — only through accumulated logic.")
             .setDangerLevel(3)
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     //OLDER SISTER
@@ -954,6 +965,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.father,
                     NextStatementIsALie.characterNames.father, 0, 2))
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene confrontParents = new Scene.Builder("ConfrontParents",
@@ -1153,6 +1165,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.familyFriend,
                     NextStatementIsALie.characterNames.familyFriend, 1, 1))
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene lieFatherCellar = new Scene.Builder("LieFatherCellar",
@@ -1215,6 +1228,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.cousin,
                     NextStatementIsALie.characterNames.cousin, 0, 1))
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene recordCellarPassage = new Scene.Builder("RecordCellarPassage",
@@ -1259,6 +1273,7 @@ public class Scene {
             .addChoice(new Choice("Guess it is the Uncle", "Final Gathering"))
             .addChoice(new Choice("Guess it is the Cousin", "Final Gathering"))
             .addChoice(new Choice("Guess it is the Family Friend", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene waitInCellar = new Scene.Builder("WaitInCellar",
@@ -1540,6 +1555,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.uncle, 0, 2))
             .addChoice(new Choice("Accuse the Cousin", "Final Gathering"))
             .addChoice(new Choice("Accuse the Family Friend", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     Scene callOutFromStudy = new Scene.Builder("CallOutFromStudy",
@@ -1653,6 +1669,169 @@ public class Scene {
             .addChoice(new Choice("Go to the Fireplace", "GoToFireplace"))
             .addChoice(new Choice("Go to Wine Cellar", "GoToCellar"))
             .build();
+
+    //FINAL GATHERING
+
+    Scene finalGathering = new Scene.Builder("Final Gathering",
+            "The remaining members of the family gather in the dimly lit sitting room.\n" +
+                    "No one speaks at first. The fire has died down to embers.\n" +
+                    "Every face is a mask — grief, fear, or something else entirely.\n\n" +
+                    "You look around the room. You have been through the house.\n" +
+                    "You have seen what others have not.\n\n" +
+                    "Now it comes down to this.\n\n" +
+                    "You may accuse someone — but choose carefully.\n" +
+                    "A wrong accusation ends everything.\n" +
+                    "If you are not ready, you can attempt to leave.")
+            .addChoice(new Choice(
+                    "Accuse the Mother",
+                    "AccuseOutcomeMother",
+                    null,
+                    null,
+                    NextStatementIsALie.characterNames.mother,
+                    NextStatementIsALie.characterNames.mother, 3))
+            .addChoice(new Choice(
+                    "Accuse the Father",
+                    "AccuseOutcomeFather",
+                    null,
+                    null,
+                    NextStatementIsALie.characterNames.father,
+                    NextStatementIsALie.characterNames.father, 3))
+            .addChoice(new Choice(
+                    "Accuse the Older Sister",
+                    "AccuseOutcomeOlderSister",
+                    null,
+                    NextStatementIsALie.characterNames.familyFriend,  // only appears if playing as Family Friend,
+                    NextStatementIsALie.characterNames.olderSister,
+                    NextStatementIsALie.characterNames.olderSister, 3))
+            .addChoice(new Choice(
+                    "Accuse the Uncle",
+                    "AccuseOutcomeUncle",
+                    null,
+                    null,
+                    NextStatementIsALie.characterNames.uncle,
+                    NextStatementIsALie.characterNames.uncle, 3))
+            .addChoice(new Choice(
+                    "Accuse the Cousin",
+                    "AccuseOutcomeCousin",
+                    null,
+                    null,
+                    NextStatementIsALie.characterNames.cousin,
+                    NextStatementIsALie.characterNames.cousin, 3))
+            .addChoice(new Choice(
+                    "Accuse the Family Friend",
+                    "AccuseOutcomeFamilyFriend",
+                    null,
+                    NextStatementIsALie.characterNames.olderSister,  // only appears if playing as OlderSister
+                    NextStatementIsALie.characterNames.familyFriend,
+                    NextStatementIsALie.characterNames.familyFriend, 3))
+            .addChoice(new Choice(
+                    "Attempt to leave without accusing anyone",
+                    "EscapeUnsolved"))
+            .build();
+
+//Accusation outcomes
+
+    Scene accuseOutcomeMother = new Scene.Builder("AccuseOutcomeMother",
+            "You step forward. All eyes turn to you.\n\n" +
+                    "\"It was you,\" you say, looking directly at the Mother.\n\n" +
+                    "The room goes utterly still.\n\n" +
+                    "She holds your gaze for a long moment.\n" +
+                    "Then something shifts in her expression.")
+            .build();
+
+    Scene accuseOutcomeFather = new Scene.Builder("AccuseOutcomeFather",
+            "You step forward. All eyes turn to you.\n\n" +
+                    "\"It was you,\" you say, looking directly at the Father.\n\n" +
+                    "The room goes utterly still.\n\n" +
+                    "He holds your gaze for a long moment.\n" +
+                    "Then something shifts in his expression.")
+            .build();
+
+    Scene accuseOutcomeOlderSister = new Scene.Builder("AccuseOutcomeOlderSister",
+            "You step forward. All eyes turn to you.\n\n" +
+                    "\"It was you,\" you say, looking directly at the Older Sister.\n\n" +
+                    "The room goes utterly still.\n\n" +
+                    "She holds your gaze for a long moment.\n" +
+                    "Then something shifts in her expression.")
+            .build();
+
+    Scene accuseOutcomeUncle = new Scene.Builder("AccuseOutcomeUncle",
+            "You step forward. All eyes turn to you.\n\n" +
+                    "\"It was you,\" you say, looking directly at the Uncle.\n\n" +
+                    "The room goes utterly still.\n\n" +
+                    "He holds your gaze for a long moment.\n" +
+                    "Then something shifts in his expression.")
+            .build();
+
+    Scene accuseOutcomeCousin = new Scene.Builder("AccuseOutcomeCousin",
+            "You step forward. All eyes turn to you.\n\n" +
+                    "\"It was you,\" you say, looking directly at the Cousin.\n\n" +
+                    "The room goes utterly still.\n\n" +
+                    "He holds your gaze for a long moment.\n" +
+                    "Then something shifts in his expression.")
+            .build();
+
+    Scene accuseOutcomeFamilyFriend = new Scene.Builder("AccuseOutcomeFamilyFriend",
+            "You step forward. All eyes turn to you.\n\n" +
+                    "\"It was you,\" you say, looking directly at the Family Friend.\n\n" +
+                    "The room goes utterly still.\n\n" +
+                    "They hold your gaze for a long moment.\n" +
+                    "Then something shifts in their expression.")
+            .build();
+
+// These are loaded by the GUI after processGuess() resolves,
+// based on endingType. One scene per endingType.
+
+    Scene endingCorrectGuessEscape = new Scene.Builder("EndingCorrectGuessEscape",
+            "The colour drains from their face.\n\n" +
+                    "For a moment it looks like they might deny it.\n" +
+                    "Then the evidence you have gathered closes around them\n" +
+                    "like a trap they built themselves.\n\n" +
+                    "Someone calls for help. Someone else is already at the door.\n\n" +
+                    "You walk out into the cold night air.\n" +
+                    "The house disappears behind you.\n\n" +
+                    "The killer was: " + "[ revealed by GUI from getKillerReveal() ]\n\n" +
+                    "You survived. You solved it.\n" +
+                    "The truth cost something — but you made it out.")
+            .build();
+
+    Scene endingCorrectGuessTooLate = new Scene.Builder("EndingCorrectGuessTooLate",
+            "You are right.\n\n" +
+                    "You can see it in their eyes the moment you say it.\n" +
+                    "But you said it too late.\n\n" +
+                    "They are already moving.\n" +
+                    "The others are too far away.\n" +
+                    "You had the answer — you just ran out of time.\n\n" +
+                    "The killer was: " + "[ revealed by GUI from getKillerReveal() ]\n\n" +
+                    "You solved it. But it was not enough.")
+            .build();
+
+    Scene endingWrongGuess = new Scene.Builder("EndingWrongGuess",
+            "The room erupts.\n\n" +
+                    "The person you accused stares at you in disbelief — then in fury.\n" +
+                    "The real killer watches from across the room, expression unreadable.\n\n" +
+                    "In the chaos that follows, no one is watching the right person.\n\n" +
+                    "The killer was: " + "[ revealed by GUI from getKillerReveal() ]\n\n" +
+                    "You were wrong. The night does not end well.")
+            .build();
+
+    Scene endingEscapedUnsolved = new Scene.Builder("EndingEscapedUnsolved",
+            "You slip out the back door.\n\n" +
+                    "The cold air hits you and you do not look back.\n" +
+                    "Somewhere behind you, in that house, the killer is still there.\n" +
+                    "Still among them.\n\n" +
+                    "You are alive. That is something.\n\n" +
+                    "But the truth stays buried in that house tonight.")
+            .build();
+
+    Scene endingEveryoneDead = new Scene.Builder("EndingEveryoneDead",
+            "The sitting room is silent.\n\n" +
+                    "You look around at what remains.\n" +
+                    "One by one, the night took them.\n\n" +
+                    "You are the only one left standing.\n\n" +
+                    "The killer was: " + "[ revealed by GUI from getKillerReveal() ]\n\n" +
+                    "There is no one left to accuse.\n" +
+                    "There is no one left to save.\n" +
+                    "You survived — but there is nothing left to survive for.")
+            .build();
 }
-
-

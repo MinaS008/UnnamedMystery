@@ -36,6 +36,7 @@ public class NextStatementIsALie {
 
     private int dangerLevel;
     private boolean finalGatheringTriggered;
+    private boolean ambushTriggered = false;
     private Set<characterNames> deadCharacters;
     private List<gameListener> listeners;
 
@@ -43,7 +44,6 @@ public class NextStatementIsALie {
     public NextStatementIsALie(Map<String, Scene> sceneRegistry) {
         this.sceneRegistry = Collections.unmodifiableMap(sceneRegistry);
         this.characters = buildCharacters();
-        this.killer = null;
         this.inventory = new ArrayList<>();
         this.deadCharacters = new HashSet<>();
         this.listeners = new ArrayList<>();
@@ -101,6 +101,7 @@ public class NextStatementIsALie {
         this.playableCharacter = chosen;
         this.killer = randomizeKiller(chosen);
         this.killer.setKiller(true);
+        this.ambushTriggered = false;
         gameState = gameState.exploring;
         loadScene("Opening Scene");
         notifyListeners(gameEvent.characterSelected);
@@ -163,10 +164,14 @@ public class NextStatementIsALie {
     public void adjustSuspicion(characterNames name, int num) {
         Character c = characters.get(name);
         if (c == null) return;
-        int current = c.getSuspicionLevel();
-        int capped = Math.min(num, maxSuspicion - current);
-        if (capped > 0) {
-            c.increaseSuspicionLevel(capped);
+        if (num > 0) {
+            int current = c.getSuspicionLevel();
+            int capped = Math.min(num, maxSuspicion - current);
+            if (capped > 0) {
+                c.increaseSuspicionLevel(capped);
+            }
+        } else if (num < 0) {
+            c.decreaseSuspicionLevel(-num);
         }
         notifyListeners(gameEvent.suspicionChanged);
     }
@@ -291,7 +296,8 @@ public class NextStatementIsALie {
 
     //Check if danger has reached threshold
     private void checkDangerLevel() {
-        if (dangerLevel >= dangerAmbushThreshold && gameState == gameState.exploring) {
+        if (!ambushTriggered && dangerLevel >= dangerAmbushThreshold && gameState == gameState.exploring) {
+            ambushTriggered = true;
             loadScene("Ambush " + killer.getName().toString());
         }
     }
