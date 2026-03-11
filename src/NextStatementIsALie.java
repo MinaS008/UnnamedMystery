@@ -133,6 +133,10 @@ public class NextStatementIsALie {
             notifyListeners(gameEvent.choiceUnavailable);
             return;
         }
+        if ("EscapeUnsolved".equals(choice.getTargetSceneId())) {
+            escapeWithoutSolving();
+            return;
+        }
 
         loadScene(choice.getTargetSceneId());
     }

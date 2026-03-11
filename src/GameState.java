@@ -490,9 +490,6 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
             // Normal scene — render choices
             renderChoices(game.getAvailableChoices());
         }
-
-        // Render choices (but keep them disabled during typewriter)
-        renderChoices(game.getAvailableChoices());
     }
 
     private String formatSceneTitle(String sceneID) {
@@ -832,7 +829,13 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
                     break;
 
                 case gameEnded:
-                    performTransition(() -> showEndingScreen(game.getEndingType()), true);
+                    NextStatementIsALie.endingType ending = game.getEndingType();
+                    if (ending == NextStatementIsALie.endingType.escapedUnsolved) {
+                        isTransitioning = false; // clear any stuck transition
+                        showEndingScreen(ending);
+                    } else {
+                        performTransition(() -> showEndingScreen(ending), true);
+                    }
                     break;
 
                 case inventoryChanged:

@@ -660,6 +660,7 @@ public class Scene {
                     "You hear footsteps in the hallway.")
             .addInventorySystem("tamperedMedication")
             .addChoice(new Choice("Hide the bottle in your pocket", "HideBottle"))
+            .addChoice(new Choice("Leave the bottle where it is", "LeaveBottle"))
             .addChoice(new Choice("Examine the towel", "ExamineTowel"))
             .addChoice(new Choice("Examine the stain", "ExamineStain"))
             .build();
@@ -1701,8 +1702,7 @@ public class Scene {
                     "You have seen what others have not.\n\n" +
                     "Now it comes down to this.\n\n" +
                     "You may accuse someone — but choose carefully.\n" +
-                    "A wrong accusation ends everything.\n" +
-                    "If you are not ready, you can attempt to leave.")
+                    "A wrong accusation ends everything.\n")
             .addChoice(new Choice(
                     "Accuse the Mother",
                     "AccuseOutcomeMother",
@@ -1745,9 +1745,6 @@ public class Scene {
                     NextStatementIsALie.characterNames.olderSister,  // only appears if playing as OlderSister
                     NextStatementIsALie.characterNames.familyFriend,
                     NextStatementIsALie.characterNames.familyFriend, 3))
-            .addChoice(new Choice(
-                    "Attempt to leave without accusing anyone",
-                    "EscapeUnsolved"))
             .build();
 
 //Accusation outcomes
