@@ -25,6 +25,7 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
 
     // Game reference
     private final NextStatementIsALie game;
+    private GameSidebarPanel sidebar;
 
     // Main panels
     private JPanel mainContainer;
@@ -61,7 +62,12 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
         this.isTypewriting = false;
         this.isTransitioning = false;
 
+        // Create sidebar and register it as a listener right away,
+        // so it never misses any events from this point forward.
+        this.sidebar = new GameSidebarPanel();
         game.addListener(this);
+        game.addListener(sidebar);
+
         initializeFrame();
         buildUI();
         showCharacterSelect();
@@ -419,8 +425,25 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
     private void showGamePanel() {
         mainContainer.removeAll();
         mainContainer.add(leftPanel, BorderLayout.CENTER);
+        mainContainer.add(sidebar, BorderLayout.EAST);
         mainContainer.revalidate();
         mainContainer.repaint();
+
+        // The characterSelected event fired before the sidebar was added to the
+        // layout, so it never received it and stayed hidden. We seed it manually now.
+        sidebar.onGameEvent(NextStatementIsALie.gameEvent.characterSelected, game);
+        sidebar.onGameEvent(NextStatementIsALie.gameEvent.sceneChanged, game);
+        sidebar.onGameEvent(NextStatementIsALie.gameEvent.inventoryChanged, game);
+    }
+
+    private static final Map<String, NextStatementIsALie.characterNames> ACCUSE_SCENE_MAP = new LinkedHashMap<>();
+    static {
+        ACCUSE_SCENE_MAP.put("AccuseOutcomeMother",       NextStatementIsALie.characterNames.mother);
+        ACCUSE_SCENE_MAP.put("AccuseOutcomeFather",       NextStatementIsALie.characterNames.father);
+        ACCUSE_SCENE_MAP.put("AccuseOutcomeOlderSister",  NextStatementIsALie.characterNames.olderSister);
+        ACCUSE_SCENE_MAP.put("AccuseOutcomeUncle",        NextStatementIsALie.characterNames.uncle);
+        ACCUSE_SCENE_MAP.put("AccuseOutcomeCousin",       NextStatementIsALie.characterNames.cousin);
+        ACCUSE_SCENE_MAP.put("AccuseOutcomeFamilyFriend", NextStatementIsALie.characterNames.familyFriend);
     }
 
     private void renderScene(Scene scene) {
@@ -429,6 +452,9 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
         String sceneID = scene.getSceneID();
         isOpeningGathering = sceneID.equals("OpeningGathering");
         isFinalGathering = sceneID.contains("Final Gathering") || scene.getTriggersFinalGathering();
+
+        NextStatementIsALie.characterNames accused = ACCUSE_SCENE_MAP.get(sceneID);
+        boolean isAccuseScene = (accused != null);
 
         // Update scene title
         sceneTitle.setText(formatSceneTitle(sceneID));
@@ -441,6 +467,28 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
             startTypewriterAnimation(TYPEWRITER_DELAY_SLOW);
         } else {
             startTypewriterAnimation(TYPEWRITER_DELAY_NORMAL);
+        }
+
+        if (isAccuseScene) {
+            // No choices shown on accusation scenes
+            for (JButton btn : choiceButtons) btn.setVisible(false);
+
+            // After the typewriter finishes, call processGuess and let
+            // triggerEnding -> gameEnded -> showEndingScreen handle the rest.
+            final NextStatementIsALie.characterNames finalAccused = accused;
+            javax.swing.Timer endingDelay = new javax.swing.Timer(400, null);
+            endingDelay.setRepeats(false);
+            endingDelay.addActionListener(e -> {
+                if (isTypewriting) {
+                    endingDelay.restart(); // typewriter still running, check again
+                } else {
+                    game.processGuess(finalAccused);
+                }
+            });
+            endingDelay.start();
+        } else {
+            // Normal scene — render choices
+            renderChoices(game.getAvailableChoices());
         }
 
         // Render choices (but keep them disabled during typewriter)
@@ -774,6 +822,12 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
                     break;
 
                 case sceneChanged:
+                    // Guard: if the game has already ended, a trailing sceneChanged
+                    // (fired by loadScene after gameEnded) must not overwrite the ending screen.
+                    if (game.getGameState() == NextStatementIsALie.gameState.gameOverWin ||
+                            game.getGameState() == NextStatementIsALie.gameState.gameOverLose) {
+                        break;
+                    }
                     renderScene(game.getCurrentScene());
                     break;
 
@@ -784,15 +838,12 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
                 case inventoryChanged:
                 case suspicionChanged:
                 case dangerChanged:
-                    // Could update UI indicators here
                     break;
 
                 case characterDied:
-                    // Could show death notification
                     break;
 
                 case choiceUnavailable:
-                    // Flash the unavailable choice red briefly
                     break;
             }
         });
@@ -841,6 +892,141 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
     }
 
     public static void main(String[] args) {
-        
+        Map<String, Scene> registry = new LinkedHashMap<>();
+
+        registry.put("OpeningGathering", Scene.openingGathering);
+
+        // Family Friend scenes
+        registry.put("OpenSceneForFriend", Scene.openSceneFriend);
+        registry.put("GoToStudy", Scene.goToStudy);
+        registry.put("CheckTheWill", Scene.checkTheWill);
+        registry.put("DefendYourselfOldSister", Scene.defendYourselfOldSister);
+        registry.put("NoActionOldSister", Scene.noActionOldSister);
+        registry.put("CheckFrame", Scene.checkFrame);
+        registry.put("AccuseCousin", Scene.accuseCousin);
+        registry.put("AskCousin", Scene.askCousin);
+        registry.put("CheckLaptop", Scene.checkLaptop);
+        registry.put("CheckLoginHistory", Scene.checkLoginHistory);
+        registry.put("AccuseFromLaptop", Scene.accuseFromLaptop);
+        registry.put("GoToAttic", Scene.goToAttic);
+        registry.put("CheckLockedChest", Scene.checkLockedChest);
+        registry.put("ReadConfession", Scene.readConfession);
+        registry.put("SuspectUncleFramed", Scene.suspectUncleFramed);
+        registry.put("SuspectFatherFaked", Scene.suspectFatherFaked);
+        registry.put("SuspectMotherConfession", Scene.suspectMotherConfession);
+        registry.put("InspectVial", Scene.inspectVial);
+        registry.put("SuspectCousinVial", Scene.suspectCousinVial);
+        registry.put("SuspectSelf", Scene.suspectSelf);
+        registry.put("SuspectOlderSisterVial", Scene.suspectOlderSisterVial);
+        registry.put("ExamineCloak", Scene.examineCloak);
+        registry.put("SuspectMotherCloak", Scene.suspectMotherCloak);
+        registry.put("SuspectUncle", Scene.suspectUncleCloak);
+        registry.put("CheckTrunk", Scene.checkTrunk);
+        registry.put("InspectPhotos", Scene.inspectPhotos);
+        registry.put("ArguePhoto", Scene.arguePhoto);
+        registry.put("LeaveTheTrunk", Scene.leaveTheTrunk);
+        registry.put("CheckLetters", Scene.checkLetters);
+        registry.put("ReadAllLetters", Scene.readAllLetters);
+        registry.put("TakeThreatLetter", Scene.takeThreatLetter);
+        registry.put("LeaveLetters", Scene.leaveLetters);
+        registry.put("GoToBathroom", Scene.goToBathroom);
+        registry.put("ExaminePillBottle", Scene.examinePillBottle);
+        registry.put("HideBottle", Scene.hideBottle);
+        registry.put("LeaveBottle", Scene.leaveBottle);
+        registry.put("CatchHallwayPerson", Scene.catchHallwayPerson);
+        registry.put("ConfrontHallwayPerson", Scene.confrontHallwayPerson);
+        registry.put("EscapeHallway", Scene.escapeHallway);
+        registry.put("StayHallway", Scene.stayHallway);
+        registry.put("RunFromHallway", Scene.runFromHallway);
+        registry.put("ExamineTowel", Scene.examineTowel);
+        registry.put("TakeTowel", Scene.takeTowel);
+        registry.put("IgnoreHallwayPerson", Scene.ignoreHallwayPerson);
+        registry.put("SmellTowel", Scene.smellTowel);
+        registry.put("OpenDoorSuddenly", Scene.openDoorSuddenly);
+        registry.put("ListenAtDoor", Scene.listenAtDoor);
+        registry.put("ExamineStain", Scene.examineStain);
+        registry.put("TouchResidue", Scene.touchResidue);
+        registry.put("KeepCufflink", Scene.keepCufflink);
+        registry.put("LeaveCufflink", Scene.leaveCufflink);
+        registry.put("FollowScrapeMarks", Scene.followScrapeMarks);
+        registry.put("HideInCloset", Scene.hideInCloset);
+        registry.put("StandGround", Scene.standGround);
+
+        // Older Sister scenes
+        registry.put("OpenSceneForSister", Scene.openSceneSister);
+        registry.put("GoToPantry", Scene.goToPantry);
+        registry.put("InvestigateArguing", Scene.investigateArguing);
+        registry.put("RecordParents", Scene.recordParents);
+        registry.put("ConfrontParents", Scene.confrontParents);
+        registry.put("RunFromArguing", Scene.runFromArguing);
+        registry.put("SisterExitOption", Scene.sisterExitOption);
+        registry.put("GoToNursery", Scene.goToNursery);
+        registry.put("CheckCrib", Scene.checkCrib);
+        registry.put("OpenWardrobeWithPresence", Scene.openWardrobeWithPresence);
+        registry.put("CheckWardrobe", Scene.checkWardrobe);
+        registry.put("HideVialFromCousin", Scene.hideVialFromCousin);
+        registry.put("CheckNurseryPhotos", Scene.checkNurseryPhotos);
+        registry.put("GoToCellar", Scene.goToCellar);
+        registry.put("ExamineCellarRack", Scene.examineCellarRack);
+        registry.put("BangCellarDoor", Scene.bangCellarDoor);
+        registry.put("AccuseFatherCellar", Scene.accuseFatherDirectly);
+        registry.put("LieFatherCellar", Scene.lieFatherCellar);
+        registry.put("FindCellarPassage", Scene.findCellarPassage);
+        registry.put("RevealCellarPassage", Scene.revealCellarPassage);
+        registry.put("RecordCellarPassage", Scene.recordCellarPassage);
+        registry.put("FollowCellarFootprint", Scene.followCellarFootprint);
+        registry.put("HideInTunnel", Scene.hideInTunnel);
+        registry.put("WaitInCellar", Scene.waitInCellar);
+        registry.put("TrustCousin", Scene.trustCousin);
+        registry.put("InspectBrokenGlass", Scene.inspectBrokenGlass);
+        registry.put("CellarDarkTurnAround", Scene.cellarDarkTurnAround);
+        registry.put("CellarDarkRun", Scene.cellarDarkRun);
+        registry.put("CellarDarkStill", Scene.cellarDarkStill);
+        registry.put("GoToStudySister", Scene.goToStudySister);
+        registry.put("ReadWillSister", Scene.readWillSister);
+        registry.put("ConfrontMotherWill", Scene.confrontMotherWill);
+        registry.put("HideWillFromMother", Scene.hideWillFromMother);
+        registry.put("ForceDrawer", Scene.forceDrawer);
+        registry.put("GoUpstairsGlass", Scene.goUpstairsGlass);
+        registry.put("TakeRevolver", Scene.takeRevolver);
+        registry.put("CallOutFromStudy", Scene.callOutFromStudy);
+        registry.put("HideWillSister", Scene.hideWillSister);
+        registry.put("GoToFireplace", Scene.goToFireplace);
+        registry.put("PieceDocument", Scene.pieceDocument);
+        registry.put("SearchChimney", Scene.searchChimney);
+        registry.put("StayInKitchen", Scene.stayInKitchen);
+
+        // Final Gathering and endings
+        registry.put("Final Gathering", Scene.finalGathering);
+        registry.put("AccuseOutcomeMother", Scene.accuseOutcomeMother);
+        registry.put("AccuseOutcomeFather", Scene.accuseOutcomeFather);
+        registry.put("AccuseOutcomeOlderSister", Scene.accuseOutcomeOlderSister);
+        registry.put("AccuseOutcomeUncle", Scene.accuseOutcomeUncle);
+        registry.put("AccuseOutcomeCousin", Scene.accuseOutcomeCousin);
+        registry.put("AccuseOutcomeFamilyFriend", Scene.accuseOutcomeFamilyFriend);
+        registry.put("EndingCorrectGuessEscape", Scene.endingCorrectGuessEscape);
+        registry.put("EndingCorrectGuessTooLate", Scene.endingCorrectGuessTooLate);
+        registry.put("EndingWrongGuess", Scene.endingWrongGuess);
+        registry.put("EndingEscapedUnsolved", Scene.endingEscapedUnsolved);
+        registry.put("EndingEveryoneDead", Scene.endingEveryoneDead);
+
+        // Ambush scenes
+        registry.put("Ambush Mother", Scene.ambushMother);
+        registry.put("Ambush Father", Scene.ambushFather);
+        registry.put("Ambush Older sister", Scene.ambushOlderSister);
+        registry.put("Ambush Uncle", Scene.ambushUncle);
+        registry.put("Ambush Cousin", Scene.ambushCousin);
+        registry.put("Ambush Family Friend", Scene.ambushFamilyFriend);
+
+        // Create game engine and start it
+        NextStatementIsALie game = new NextStatementIsALie(registry);
+        game.startGame();
+
+        // Launch the GUI on the Swing event thread
+        SwingUtilities.invokeLater(() -> {
+            GameState window = new GameState(game);
+            window.setVisible(true);
+        });
     }
 }
+
