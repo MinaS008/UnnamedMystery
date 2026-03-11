@@ -37,28 +37,28 @@ public class Clue {
                 "A kitchen knife smeared with dark residue. Someone was in here.",
                 NextStatementIsALie.characterNames.mother, 2);
         register("pantryNote",
-                "A crumpled note: 'No wound was carved -the silent killer made it rise alone.' Posion.",
+                "A crumpled note: 'No wound was carved -the silent killer made it rise alone.' Poison.",
                 NextStatementIsALie.characterNames.father, 2);
         register("brokenWineGlass",
                 "A shattered wine glass in the cellar. The uncle never lets anyone touch his collection.",
                 NextStatementIsALie.characterNames.uncle, 2);
         register("almondScent",
-                "A bitter almond smell from a forced-open box. Granfather was allergic to almonds.",
+                "A bitter almond smell from a forced-open box. Grandfather was allergic to almonds.",
                 NextStatementIsALie.characterNames.father, 2);
         register("footprintPhoto",
-                "A muddy footprint near a hidden tunnel. SOmeone used a secret exit - or entrance.",
+                "A muddy footprint near a hidden tunnel. Someone used a secret exit - or entrance.",
                 NextStatementIsALie.characterNames.uncle, 2);
         register("inconsistencyNote",
-                "The dirt on the floor is new. But it hasn't rained recently, so there is no dirt oustide.",
+                "The dirt on the floor is new. But it hasn't rained recently, so there is no dirt outside.",
                 NextStatementIsALie.characterNames.uncle, 2);
         register("revisedWIll",
-                "The handwritten amendment was added this morning. Someone changed it... It is very suspiciouss",
+                "The handwritten amendment was added this morning. Someone changed it... It is very suspicious",
                 NextStatementIsALie.characterNames.father, 3);
         register("tornEnvelope",
                 "A torn envelope on the grandfather's desk. Something was sent - or received - in secret.",
                 NextStatementIsALie.characterNames.cousin, 1);
         register("allergyReport",
-                "AN official allergy report confirms a deathly reaction to almnonds.",
+                "AN official allergy report confirms a deathly reaction to almonds.",
                 NextStatementIsALie.characterNames.mother, 1);
         register("hiddenCash",
                 "A hidden stack of money behind the nursery crib. The family friend was near here earlier.",
@@ -67,7 +67,7 @@ public class Clue {
                 "Poison hidden inside the nursery wardrobe. The cousin was seen opening it earlier.",
                 NextStatementIsALie.characterNames.cousin, 3);
         register("burnedDocument",
-                "Piece up the document together and see that the name is bruned away",
+                "Piece up the document together and see that the name is burned away",
                 NextStatementIsALie.characterNames.father, 1);
         register("almondResidue",
                 "A velvet pouch hidden in the chimney containing almond shavings. Poison was staged here.",
@@ -98,8 +98,8 @@ public class Clue {
                 "Laptop login at 8:42 PM. Cross-reference with alibis - this places someone at the desk",
                 NextStatementIsALie.characterNames.uncle, 2);
 
-        register("handwrittenCOnfession",
-                "A confession letter with the aunt's signature - but the handwriting doesn't entierly match",
+        register("handwrittenConfession",
+                "A confession letter with the aunt's signature - but the handwriting doesn't entirely match",
                 NextStatementIsALie.characterNames.uncle, 2);
 
         register("fakeSignatureObservation",
@@ -134,7 +134,7 @@ public class Clue {
                 "The tampered medication — pills switched. You've pocketed the evidence.",
                 NextStatementIsALie.characterNames.mother, 3);
 
-        register("almondscentTowel",
+        register("almondScentTowel",
                 "A towel smelling of bitter almonds with foundation smeared in the corner. Not your shade.",
                 NextStatementIsALie.characterNames.mother, 2);
 
