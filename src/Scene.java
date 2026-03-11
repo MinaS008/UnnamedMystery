@@ -1910,5 +1910,4 @@ public class Scene {
             .setDangerLevel(0)
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
             .build();
-
 }

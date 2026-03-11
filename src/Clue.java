@@ -36,31 +36,31 @@ public class Clue {
         register("bloodyKnife",
                 "A kitchen knife smeared with dark residue. Someone was in here.",
                 NextStatementIsALie.characterNames.mother, 2);
-        register("pantryNote",
+        register("pantryRiddleNote",
                 "A crumpled note: 'No wound was carved -the silent killer made it rise alone.' Poison.",
                 NextStatementIsALie.characterNames.father, 2);
         register("brokenWineGlass",
                 "A shattered wine glass in the cellar. The uncle never lets anyone touch his collection.",
                 NextStatementIsALie.characterNames.uncle, 2);
-        register("almondScent",
+        register("almondScentObservation",
                 "A bitter almond smell from a forced-open box. Grandfather was allergic to almonds.",
                 NextStatementIsALie.characterNames.father, 2);
-        register("footprintPhoto",
+        register("footprintPhotograph",
                 "A muddy footprint near a hidden tunnel. Someone used a secret exit - or entrance.",
                 NextStatementIsALie.characterNames.uncle, 2);
         register("inconsistencyNote",
                 "The dirt on the floor is new. But it hasn't rained recently, so there is no dirt outside.",
                 NextStatementIsALie.characterNames.uncle, 2);
-        register("revisedWIll",
+        register("revisedWill",
                 "The handwritten amendment was added this morning. Someone changed it... It is very suspicious",
                 NextStatementIsALie.characterNames.father, 3);
         register("tornEnvelope",
                 "A torn envelope on the grandfather's desk. Something was sent - or received - in secret.",
                 NextStatementIsALie.characterNames.cousin, 1);
-        register("allergyReport",
+        register("allergyConfirmation",
                 "AN official allergy report confirms a deathly reaction to almonds.",
                 NextStatementIsALie.characterNames.mother, 1);
-        register("hiddenCash",
+        register("Hidden cash bundle",
                 "A hidden stack of money behind the nursery crib. The family friend was near here earlier.",
                 NextStatementIsALie.characterNames.familyFriend, 2);
         register("wardrobePoison",
@@ -72,6 +72,22 @@ public class Clue {
         register("almondResidue",
                 "A velvet pouch hidden in the chimney containing almond shavings. Poison was staged here.",
                 NextStatementIsALie.characterNames.mother, 3);
+        register("nurseryPhotoCollection",
+                "A torn photo with only the bottom half remaining.",
+                NextStatementIsALie.characterNames.cousin, 1);
+        register("partialRecording",
+                "You pull out your phone and begin recording through the gap in the door.",
+                NextStatementIsALie.characterNames.mother, 1);
+        register("partialCellarRecording",
+                "You make a hidden recording in hope to catch the killer in the cellar.",
+                NextStatementIsALie.characterNames.familyFriend, 1);
+        register("droppedVialNote",
+                "Your cousin stands inside, clutching a glass vial, then runs away and drops the vial note",
+                NextStatementIsALie.characterNames.cousin, 1);
+        register("amendmentOverheard",
+                "You hide in the closet and are able to hear secret talks about the amendment",
+                NextStatementIsALie.characterNames.father, 1);
+
 
         //Family Friend clues
         register("handwrittenNote",
@@ -113,10 +129,15 @@ public class Clue {
         register("blackCloakHairSample",
                 "A black cloak with a strand of dark hair and a torn sleeve. Someone wore this as a disguise.",
                 NextStatementIsALie.characterNames.olderSister, 2);
-
+        register("familyPhotoCollection",
+                "In the trunk there are a lot of family photos",
+                NextStatementIsALie.characterNames.father, 1);
         register("arguingPhoto",
                 "A photo of the vitim mid-argument behind a closed door. The other person is partially visible.",
                 NextStatementIsALie.characterNames.father, 2);
+        register("photoEvidence",
+                "If any object matches something found elsewhere, that character's suspicion rises",
+                NextStatementIsALie.characterNames.mother, 1);
 
         register("allLetters",
                 "A bundle of threat letters to the victim, signed with initials M, F, C, U, O.",
@@ -165,6 +186,15 @@ public class Clue {
         register("amendmentOverheard",
                 "Overheard: 'If they find the amendment, we're finished.' The will and bathroom now connect.",
                 NextStatementIsALie.characterNames.father, 3);
+        register("cousinAdmission",
+                "You ask the cousin why he was crossed out of the photo, and he responds: 'He found out what I was doing.'",
+                NextStatementIsALie.characterNames.cousin, 2);
+        register("whisperObservation",
+                "ou only hear one set of footsteps.Which means someone was pretending to whisper.",
+                NextStatementIsALie.characterNames.cousin, 1);
+        register("loginRecord842PM",
+                "The laptop login in the study recorded usage at 8:24 PM",
+                NextStatementIsALie.characterNames.father, 1);
     }
     private static void register(String clueID, String description, NextStatementIsALie.characterNames implicatedCharacter, int suspicionLevel) {
         registry.put(clueID, new Clue(clueID, description, implicatedCharacter, suspicionLevel));
