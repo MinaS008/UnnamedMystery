@@ -50,8 +50,6 @@ public class NextStatementIsALie {
         this.dangerLevel = 0;
         this.finalGatheringTriggered = false;
         this.gameState = gameState.notStarted;
-
-        killer.setKiller(true);
     }
 
     private Map<characterNames, Character> buildCharacters() {
@@ -107,7 +105,11 @@ public class NextStatementIsALie {
         this.killer.setKiller(true);
         this.ambushTriggered = false;
         gameState = gameState.exploring;
-        loadScene("Opening Scene");
+        if (chosen == playableCharacter.familyFriend) {
+            loadScene("OpenSceneForFriend");
+        } else {
+            loadScene("OpenSceneForSister");
+        }
         notifyListeners(gameEvent.characterSelected);
     }
 
@@ -161,6 +163,10 @@ public class NextStatementIsALie {
         //Kill characters if the scene specifies it
         for (characterNames victim : scene.getCharacterDeaths()) {
             killCharacter(victim);
+        }
+
+        if (scene.getTriggersFinalGathering() && !finalGatheringTriggered) {
+            triggerFinalGatheringManually();
         }
     }
 
@@ -302,7 +308,7 @@ public class NextStatementIsALie {
     private void checkDangerLevel() {
         if (!ambushTriggered && dangerLevel >= dangerAmbushThreshold && gameState == gameState.exploring) {
             ambushTriggered = true;
-            loadScene("Ambush " + killer.getName().toString());
+            loadScene("Ambush " + killer.getDisplayName());
         }
     }
 
@@ -568,5 +574,4 @@ public class NextStatementIsALie {
         NextStatementIsALie game = new NextStatementIsALie(registry);
         game.startGame();
     }
-    }
-
+}

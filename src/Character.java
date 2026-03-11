@@ -56,6 +56,4 @@ public class Character {
     public String toString(){
         return displayName + " | Suspicion: " + suspicionLevel + " | Alive: " + alive + (isKiller ? " | *** KILLER *** |" : "");
     }
-
-
 }

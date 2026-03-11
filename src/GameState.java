@@ -5,4 +5,7 @@ import java.awt.event.*;
 import java.util.*;
 import java.util.List;
 
-public class GameState extends JFrame implements NextStatementIsALie.gameListener{}
+public class GameState extends JFrame implements NextStatementIsALie.gameListener{
+
+
+}

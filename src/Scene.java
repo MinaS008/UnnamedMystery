@@ -1273,7 +1273,7 @@ public class Scene {
             .addChoice(new Choice("Wait and confront whoever enters", "WaitInCellar"))
             .build();
 
-    static Scene hideInTunnel = new Builder("HideInTunnel",
+    static Scene hideInTunnel = new Scene.Builder("HideInTunnel",
             "Someone enters the cellar. You see only their shoes through the gap.\n\n" +
                     "You must guess who it is.")
             .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
