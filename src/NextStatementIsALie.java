@@ -25,7 +25,7 @@ public class NextStatementIsALie {
     private static final int minCluesToAccuse = 2;
 
     private gameState gameState;
-    private endingType endingType; 
+    private endingType endingType;
     private Character killer;
     private boolean killerLocked = false;
     private playableCharacter playableCharacter;
@@ -56,13 +56,13 @@ public class NextStatementIsALie {
 
     private Map<characterNames, Character> buildCharacters() {
         Map<characterNames, Character> map = new LinkedHashMap<>();
-        map.put(characterNames.mother, new Character( characterNames.mother, "Mother", 0));
+        map.put(characterNames.mother, new Character(characterNames.mother, "Mother", 0));
         map.put(characterNames.father, new Character(characterNames.father, "Father", 0));
-        map.put(characterNames.olderSister, new Character(characterNames.olderSister,"Older sister", 0));
+        map.put(characterNames.olderSister, new Character(characterNames.olderSister, "Older sister", 0));
         map.put(characterNames.littleBrother, new Character(characterNames.littleBrother, "Little brother", 0));
         map.put(characterNames.uncle, new Character(characterNames.uncle, "Uncle", 0));
         map.put(characterNames.cousin, new Character(characterNames.cousin, "Cousin", 0));
-        map.put(characterNames.familyFriend, new Character(characterNames.familyFriend ,"Family Friend", 0));
+        map.put(characterNames.familyFriend, new Character(characterNames.familyFriend, "Family Friend", 0));
         return map;
     }
 
@@ -75,7 +75,7 @@ public class NextStatementIsALie {
                 characterNames.uncle,
                 characterNames.cousin,
                 characterNames.familyFriend
-            ));
+        ));
 
         //Remove player's character
         possibleKillers.remove(toCharacterName(chosenCharacter));
@@ -85,16 +85,19 @@ public class NextStatementIsALie {
     }
 
     private characterNames toCharacterName(playableCharacter pc) {
-        switch(pc) {
-            case olderSister: return characterNames.olderSister;
-            case familyFriend: return characterNames.familyFriend;
-            default: throw new IllegalArgumentException("Unknown playable character: " + pc);
+        switch (pc) {
+            case olderSister:
+                return characterNames.olderSister;
+            case familyFriend:
+                return characterNames.familyFriend;
+            default:
+                throw new IllegalArgumentException("Unknown playable character: " + pc);
         }
     }
 
     public void startGame() {
-        loadScene("OpeningGathering");
         gameState = gameState.characterSelect;
+        loadScene("OpeningGathering");
         notifyListeners(gameEvent.gameStarted);
     }
 
@@ -209,13 +212,13 @@ public class NextStatementIsALie {
     //Returns how many clues actually implicate the killer
     public int getIncriminatingClueCount() {
         characterNames killerKey = null;
-        for(Map.Entry<characterNames, Character> entry : characters.entrySet()) {
+        for (Map.Entry<characterNames, Character> entry : characters.entrySet()) {
             if (entry.getValue() == killer) {
                 killerKey = entry.getKey();
                 break;
             }
         }
-        if(killerKey == null) return 0;
+        if (killerKey == null) return 0;
         int count = 0;
         for (String itemID : inventory) {
             Clue clue = Clue.getByClueID(itemID);
@@ -270,8 +273,8 @@ public class NextStatementIsALie {
 
     public List<characterNames> getAliveCharacters() {
         List<characterNames> alive = new ArrayList<>();
-        for (characterNames name: characters.keySet()) {
-            if(!deadCharacters.contains(name)) {
+        for (characterNames name : characters.keySet()) {
+            if (!deadCharacters.contains(name)) {
                 alive.add(name);
             }
         }
@@ -279,7 +282,7 @@ public class NextStatementIsALie {
     }
 
     private void checkEveryoneDead() {
-        if(deadCharacters.size() >= characters.size() - 1) {
+        if (deadCharacters.size() >= characters.size() - 1) {
             triggerEnding(endingType.everyoneDead);
         }
     }
@@ -331,13 +334,13 @@ public class NextStatementIsALie {
     //Ending
     private void triggerEnding(endingType type) {
         this.endingType = type;
-        if(type == endingType.wrongGuess
-           || type == endingType.correctGuessTooLate
-           || type == endingType.everyoneDead) {
+        if (type == endingType.wrongGuess
+                || type == endingType.correctGuessTooLate
+                || type == endingType.everyoneDead) {
             this.gameState = gameState.gameOverLose;
-           } else {
+        } else {
             this.gameState = gameState.gameOverWin;
-           }
+        }
         notifyListeners(gameEvent.gameEnded);
     }
 
@@ -434,9 +437,136 @@ public class NextStatementIsALie {
     }
 
 
-
-
     public static void main(String[] args) {
+        Map<String, Scene> registry = new LinkedHashMap<>();
 
+        // Opening
+        registry.put("OpeningGathering", Scene.openingGathering);
+
+        // Family Friend scenes
+        registry.put("OpenSceneForFriend", Scene.openSceneFriend);
+        registry.put("GoToStudy", Scene.goToStudy);
+        registry.put("CheckTheWill", Scene.checkTheWill);
+        registry.put("DefendYourselfOldSister", Scene.defendYourselfOldSister);
+        registry.put("NoActionOldSister", Scene.noActionOldSister);
+        registry.put("CheckFrame", Scene.checkFrame);
+        registry.put("AccuseCousin", Scene.accuseCousin);
+        registry.put("AskCousin", Scene.askCousin);
+        registry.put("CheckLaptop", Scene.checkLaptop);
+        registry.put("CheckLoginHistory", Scene.checkLoginHistory);
+        registry.put("AccuseFromLaptop", Scene.accuseFromLaptop);
+        registry.put("GoToAttic", Scene.goToAttic);
+        registry.put("CheckLockedChest", Scene.checkLockedChest);
+        registry.put("ReadConfession", Scene.readConfession);
+        registry.put("SuspectUncleFramed", Scene.suspectUncleFramed);
+        registry.put("SuspectFatherFaked", Scene.suspectFatherFaked);
+        registry.put("SuspectMotherConfession", Scene.suspectMotherConfession);
+        registry.put("InspectVial", Scene.inspectVial);
+        registry.put("SuspectCousinVial", Scene.suspectCousinVial);
+        registry.put("SuspectSelf", Scene.suspectSelf);
+        registry.put("SuspectOlderSisterVial", Scene.suspectOlderSisterVial);
+        registry.put("ExamineCloak", Scene.examineCloak);
+        registry.put("SuspectMotherCloak", Scene.suspectMotherCloak);
+        registry.put("SuspectUncle", Scene.suspectUncleCloak);
+        registry.put("CheckTrunk", Scene.checkTrunk);
+        registry.put("InspectPhotos", Scene.inspectPhotos);
+        registry.put("ArguePhoto", Scene.arguePhoto);
+        registry.put("LeaveTheTrunk", Scene.leaveTheTrunk);
+        registry.put("CheckLetters", Scene.checkLetters);
+        registry.put("ReadAllLetters", Scene.readAllLetters);
+        registry.put("TakeThreatLetter", Scene.takeThreatLetter);
+        registry.put("LeaveLetters", Scene.leaveLetters);
+        registry.put("GoToBathroom", Scene.goToBathroom);
+        registry.put("ExaminePillBottle", Scene.examinePillBottle);
+        registry.put("HideBottle", Scene.hideBottle);
+        registry.put("LeaveBottle", Scene.leaveBottle);
+        registry.put("CatchHallwayPerson", Scene.catchHallwayPerson);
+        registry.put("ConfrontHallwayPerson", Scene.confrontHallwayPerson);
+        registry.put("EscapeHallway", Scene.escapeHallway);
+        registry.put("StayHallway", Scene.stayHallway);
+        registry.put("RunFromHallway", Scene.runFromHallway);
+        registry.put("ExamineTowel", Scene.examineTowel);
+        registry.put("TakeTowel", Scene.takeTowel);
+        registry.put("IgnoreHallwayPerson", Scene.ignoreHallwayPerson);
+        registry.put("SmellTowel", Scene.smellTowel);
+        registry.put("OpenDoorSuddenly", Scene.openDoorSuddenly);
+        registry.put("ListenAtDoor", Scene.listenAtDoor);
+        registry.put("ExamineStain", Scene.examineStain);
+        registry.put("TouchResidue", Scene.touchResidue);
+        registry.put("KeepCufflink", Scene.keepCufflink);
+        registry.put("LeaveCufflink", Scene.leaveCufflink);
+        registry.put("FollowScrapeMarks", Scene.followScrapeMarks);
+        registry.put("HideInCloset", Scene.hideInCloset);
+        registry.put("StandGround", Scene.standGround);
+
+        // Older Sister scenes
+        registry.put("OpenSceneForSister", Scene.openSceneSister);
+        registry.put("GoToPantry", Scene.goToPantry);
+        registry.put("InvestigateArguing", Scene.investigateArguing);
+        registry.put("RecordParents", Scene.recordParents);
+        registry.put("ConfrontParents", Scene.confrontParents);
+        registry.put("RunFromArguing", Scene.runFromArguing);
+        registry.put("SisterExitOption", Scene.sisterExitOption);
+        registry.put("GoToNursery", Scene.goToNursery);
+        registry.put("CheckCrib", Scene.checkCrib);
+        registry.put("OpenWardrobeWithPresence", Scene.openWardrobeWithPresence);
+        registry.put("CheckWardrobe", Scene.checkWardrobe);
+        registry.put("HideVialFromCousin", Scene.hideVialFromCousin);
+        registry.put("CheckNurseryPhotos", Scene.checkNurseryPhotos);
+        registry.put("GoToCellar", Scene.goToCellar);
+        registry.put("ExamineCellarRack", Scene.examineCellarRack);
+        registry.put("BangCellarDoor", Scene.bangCellarDoor);
+        registry.put("AccuseFatherCellar", Scene.accuseFatherDirectly);
+        registry.put("LieFatherCellar", Scene.lieFatherCellar);
+        registry.put("FindCellarPassage", Scene.findCellarPassage);
+        registry.put("RevealCellarPassage", Scene.revealCellarPassage);
+        registry.put("RecordCellarPassage", Scene.recordCellarPassage);
+        registry.put("FollowCellarFootprint", Scene.followCellarFootprint);
+        registry.put("HideInTunnel", Scene.hideInTunnel);
+        registry.put("WaitInCellar", Scene.waitInCellar);
+        registry.put("TrustCousin", Scene.trustCousin);
+        registry.put("InspectBrokenGlass", Scene.inspectBrokenGlass);
+        registry.put("CellarDarkTurnAround", Scene.cellarDarkTurnAround);
+        registry.put("CellarDarkRun", Scene.cellarDarkRun);
+        registry.put("CellarDarkStill", Scene.cellarDarkStill);
+        registry.put("GoToStudySister", Scene.goToStudySister);
+        registry.put("ReadWillSister", Scene.readWillSister);
+        registry.put("ConfrontMotherWill", Scene.confrontMotherWill);
+        registry.put("HideWillFromMother", Scene.hideWillFromMother);
+        registry.put("ForceDrawer", Scene.forceDrawer);
+        registry.put("GoUpstairsGlass", Scene.goUpstairsGlass);
+        registry.put("TakeRevolver", Scene.takeRevolver);
+        registry.put("CallOutFromStudy", Scene.callOutFromStudy);
+        registry.put("HideWillSister", Scene.hideWillSister);
+        registry.put("GoToFireplace", Scene.goToFireplace);
+        registry.put("PieceDocument", Scene.pieceDocument);
+        registry.put("SearchChimney", Scene.searchChimney);
+        registry.put("StayInKitchen", Scene.stayInKitchen);
+
+        // Final Gathering and endings
+        registry.put("Final Gathering", Scene.finalGathering);
+        registry.put("AccuseOutcomeMother", Scene.accuseOutcomeMother);
+        registry.put("AccuseOutcomeFather", Scene.accuseOutcomeFather);
+        registry.put("AccuseOutcomeOlderSister", Scene.accuseOutcomeOlderSister);
+        registry.put("AccuseOutcomeUncle", Scene.accuseOutcomeUncle);
+        registry.put("AccuseOutcomeCousin", Scene.accuseOutcomeCousin);
+        registry.put("AccuseOutcomeFamilyFriend", Scene.accuseOutcomeFamilyFriend);
+        registry.put("EndingCorrectGuessEscape", Scene.endingCorrectGuessEscape);
+        registry.put("EndingCorrectGuessTooLate", Scene.endingCorrectGuessTooLate);
+        registry.put("EndingWrongGuess", Scene.endingWrongGuess);
+        registry.put("EndingEscapedUnsolved", Scene.endingEscapedUnsolved);
+        registry.put("EndingEveryoneDead", Scene.endingEveryoneDead);
+
+        // Ambush scenes — one per possible killer
+        registry.put("Ambush Mother", Scene.ambushMother);
+        registry.put("Ambush Father", Scene.ambushFather);
+        registry.put("Ambush Older sister", Scene.ambushOlderSister);
+        registry.put("Ambush Uncle", Scene.ambushUncle);
+        registry.put("Ambush Cousin", Scene.ambushCousin);
+        registry.put("Ambush Family Friend", Scene.ambushFamilyFriend);
+
+        NextStatementIsALie game = new NextStatementIsALie(registry);
+        game.startGame();
     }
-}
+    }
+

@@ -136,7 +136,7 @@ public class Scene {
     }
 
     //OPENING GATHERING
-    Scene openingGathering = new Scene.Builder("OpeningGathering",
+    static Scene openingGathering = new Scene.Builder("OpeningGathering",
             "The countryside estate is silent except for the rain against the windows.\n\n" +
                     "You are gathered in the living room — all of you.\n" +
                     "The fire is low. The drinks have gone untouched.\n\n" +
@@ -158,7 +158,7 @@ public class Scene {
             .build();
 
     //FAMILY FRIEND
-    Scene openSceneFriend = new Scene.Builder("OpenSceneForFriend",
+    static Scene openSceneFriend = new Scene.Builder("OpenSceneForFriend",
             "You end up in the living room. \n" +
                     "You look around and notice something strange. \n" +
                     "On the coffee table, beneath the wine glasses, is a folded napkin with faint red staining. \n" +
@@ -173,7 +173,7 @@ public class Scene {
             .addSuspicionChange(NextStatementIsALie.characterNames.olderSister, 1)
             .setDangerLevel(1)
             .build();
-    Scene goToStudy = new Scene.Builder("GoToStudy",
+    static Scene goToStudy = new Scene.Builder("GoToStudy",
             "You enter the family’s study.\n" +
                     "The lights flicker.\n" +
                     "You see a couple of things:\n" +
@@ -188,7 +188,7 @@ public class Scene {
             .build();
 
 
-    Scene checkTheWill = new Scene.Builder("CheckTheWill",
+    static Scene checkTheWill = new Scene.Builder("CheckTheWill",
             "You get close to the desk, pick up the will, and read it. \n" +
                     "Turns out it was the grandfather’s will. \n" +
                     "You freeze. \n" +
@@ -207,7 +207,7 @@ public class Scene {
             .setDangerLevel(2)
             .build();
 
-    Scene defendYourselfOldSister = new Scene.Builder("DefendYourselfOldSister",
+    static Scene defendYourselfOldSister = new Scene.Builder("DefendYourselfOldSister",
             "You grab the nearest object to defend yourself.\n" +
                     "You hit her unconscious and run out of the room.\n\n" +
                     "She is down. The house is silent.\n" +
@@ -237,7 +237,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene noActionOldSister = new Scene.Builder("NoActionOldSister",
+    static Scene noActionOldSister = new Scene.Builder("NoActionOldSister",
             "You decide not to act rashly.\n" +
                     "The older sister glares at you, then storms out.\n" +
                     "Now you have a moment to search the study more carefully.\n" +
@@ -248,7 +248,7 @@ public class Scene {
             .addChoice(new Choice("Examine the laptop", "CheckLaptop"))
             .build();
 
-    Scene checkFrame = new Scene.Builder("CheckFrame",
+    static Scene checkFrame = new Scene.Builder("CheckFrame",
             "You reconstruct the shattered photo frame.\n" +
                     "It's a normal family picture — but there is a black X over the cousin's face.\n\n" +
                     "If the cousin is the killer, this is a genuine rage indicator.\n" +
@@ -260,7 +260,7 @@ public class Scene {
             .addChoice(new Choice("Ask why he was crossed out", "AskCousin"))
             .build();
 
-    Scene accuseCousin = new Scene.Builder("AccuseCousin",
+    static Scene accuseCousin = new Scene.Builder("AccuseCousin",
             "You point at him and press the emergency button.\n\n" +
                     "The room goes quiet. Everyone stares.\n" +
                     "Was it really him? Head to the final gathering — the truth will come out.")
@@ -289,7 +289,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene askCousin = new Scene.Builder("AskCousin",
+    static Scene askCousin = new Scene.Builder("AskCousin",
             "You ask him calmly why he was crossed out of the photo.\n" +
                     "He hesitates, then says:\n" +
                     "'He found out what I was doing.'\n\n" +
@@ -300,7 +300,7 @@ public class Scene {
             .addChoice(new Choice("Go examine the laptop", "CheckLaptop"))
             .build();
 
-    Scene checkLaptop = new Scene.Builder("CheckLaptop",
+    static Scene checkLaptop = new Scene.Builder("CheckLaptop",
             "You look at the screen.\n" +
                     "A drafted email reads:\n" +
                     "'Tonight, everything will be taken care of. The Family Friend won't get in the way.'\n\n" +
@@ -311,7 +311,7 @@ public class Scene {
             .addChoice(new Choice("Accuse immediately", "AccuseFromLaptop"))
             .build();
 
-    Scene checkLoginHistory = new Scene.Builder("CheckLoginHistory",
+    static Scene checkLoginHistory = new Scene.Builder("CheckLoginHistory",
             "You check the login history.\n" +
                     "Last login: 8:42 PM.\n\n" +
                     "Cross-reference: who had an alibi at 8:42?\n" +
@@ -321,7 +321,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene accuseFromLaptop = new Scene.Builder("AccuseFromLaptop",
+    static Scene accuseFromLaptop = new Scene.Builder("AccuseFromLaptop",
             "You press the emergency button without checking the metadata.\n\n" +
                     "You're acting on instinct. No login record, no verified author.\n" +
                     "The real killer knows you're rushing — your danger rises.\n" +
@@ -352,7 +352,7 @@ public class Scene {
 
     //Attic Branch
 
-    Scene goToAttic = new Scene.Builder("GoToAttic",
+    static Scene goToAttic = new Scene.Builder("GoToAttic",
             "You climb the narrow, creaking staircase to the attic.\n" +
                     "The air is thick with dust. Shadows stretch across the rafters.\n" +
                     "A single bulb swings slightly, casting eerie shapes.\n" +
@@ -369,7 +369,7 @@ public class Scene {
             .addChoice(new Choice("Examine the pile of letters", "CheckLetters"))
             .build();
 
-    Scene checkLockedChest = new Scene.Builder("CheckLockedChest",
+    static Scene checkLockedChest = new Scene.Builder("CheckLockedChest",
             "The chest is sturdy, with a rusted keyhole.\n" +
                     "You find a small key taped under the attic beam and unlock it.\n\n" +
                     "Inside:\n" +
@@ -384,7 +384,7 @@ public class Scene {
             .addChoice(new Choice("Examine the cloak", "ExamineCloak"))
             .build();
 
-    Scene readConfession = new Scene.Builder("ReadConfession",
+    static Scene readConfession = new Scene.Builder("ReadConfession",
             "You look closer at the handwriting.\n" +
                     "It's shaky, forced — almost practiced.\n" +
                     "The signature doesn't match the aunt's handwriting from postcards she has sent you.\n" +
@@ -397,7 +397,7 @@ public class Scene {
             .addChoice(new Choice("Suspect the Mother did it", "SuspectMotherConfession"))
             .build();
 
-    Scene suspectUncleFramed = new Scene.Builder("SuspectUncleFramed",
+    static Scene suspectUncleFramed = new Scene.Builder("SuspectUncleFramed",
             "You think the Uncle sabotaged his wife.\n" +
                     "You remember the older sister mentioning he cheated — and the aunt wants a divorce.\n" +
                     "The evidence points strongly toward him.\n\n" +
@@ -411,7 +411,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene suspectFatherFaked = new Scene.Builder("SuspectFatherFaked",
+    static Scene suspectFatherFaked = new Scene.Builder("SuspectFatherFaked",
             "You think the Father faked the confession.\n" +
                     "He was eyeing the Aunt all night — maybe he hates her for something.\n" +
                     "The evidence feels thin but the suspicion is real.\n\n" +
@@ -425,7 +425,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene suspectMotherConfession = new Scene.Builder("SuspectMotherConfession",
+    static Scene suspectMotherConfession = new Scene.Builder("SuspectMotherConfession",
             "The mother is very suspicious.\n" +
                     "She was yelling at the Father at dinner — furious he was looking at the Aunt, her sister.\n" +
                     "Jealousy. Rage. Motive.\n\n" +
@@ -439,7 +439,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene inspectVial = new Scene.Builder("InspectVial",
+    static Scene inspectVial = new Scene.Builder("InspectVial",
             "You hold the small vial up to the dim light.\n" +
                     "The liquid is dark and thick. You uncork it carefully.\n" +
                     "It smells of bitter almonds — but it's not poison.\n\n" +
@@ -453,7 +453,7 @@ public class Scene {
             .addChoice(new Choice("Suspect the Older Sister", "SuspectOlderSisterVial"))
             .build();
 
-    Scene suspectCousinVial = new Scene.Builder("SuspectCousinVial",
+    static Scene suspectCousinVial = new Scene.Builder("SuspectCousinVial",
             "The cousin has always loved drama.\n" +
                     "At dinner he said: 'Some people don't deserve second acts.'\n" +
                     "Stage One. Stage Two. That sounds theatrical.\n" +
@@ -468,7 +468,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene suspectSelf = new Scene.Builder("SuspectSelf",
+    static Scene suspectSelf = new Scene.Builder("SuspectSelf",
             "You don't remember how you got into the house tonight.\n" +
                     "The whole night feels like a fever dream.\n" +
                     "You were the first person to find the body. You were very calm.\n\n" +
@@ -477,7 +477,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene suspectOlderSisterVial = new Scene.Builder("SuspectOlderSisterVial",
+    static Scene suspectOlderSisterVial = new Scene.Builder("SuspectOlderSisterVial",
             "The older sister loves control.\n" +
                     "She said: 'Everything in this house happens in phases.'\n" +
                     "Phases. Stages. She disappeared right before the body was found.\n" +
@@ -492,7 +492,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene examineCloak = new Scene.Builder("ExamineCloak",
+    static Scene examineCloak = new Scene.Builder("ExamineCloak",
             "You lift the black hooded cloak. It's heavy, high quality, recently worn.\n" +
                     "Inside the hood: a single long strand of dark hair. Not the Aunt's — her hair is short.\n" +
                     "Near the sleeve: a small tear, like it caught on something sharp.\n" +
@@ -523,7 +523,7 @@ public class Scene {
             .addChoice(new Choice("Suspect the Uncle", "SuspectUncle"))
             .build();
 
-    Scene suspectMotherCloak = new Scene.Builder("SuspectMotherCloak",
+    static Scene suspectMotherCloak = new Scene.Builder("SuspectMotherCloak",
             "The mother left the table suddenly before dessert, claiming she needed air.\n" +
                     "You later saw a small scratch on her wrist. That tear in the sleeve...\n\n" +
                     "Head to the final gathering and make your accusation.")
@@ -536,7 +536,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene suspectUncleCloak = new Scene.Builder("SuspectUncleCloak",
+    static Scene suspectUncleCloak = new Scene.Builder("SuspectUncleCloak",
             "He once joked: 'Every good criminal needs a costume.'\n" +
                     "The cloak fits his dramatic personality.\n" +
                     "He had motive — the divorce, the inheritance, the humiliation.\n\n" +
@@ -550,7 +550,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene checkTrunk = new Scene.Builder("CheckTrunk",
+    static Scene checkTrunk = new Scene.Builder("CheckTrunk",
             "You lift the lid of the trunk. Dust swirls in the dim light.\n" +
                     "Inside are old family photos. Most are mundane, but a few stand out:\n" +
                     "- A photo of the victim arguing with someone behind a closed door.\n" +
@@ -563,7 +563,7 @@ public class Scene {
             .addChoice(new Choice("Leave the trunk alone", "LeaveTheTrunk"))
             .build();
 
-    Scene inspectPhotos = new Scene.Builder("InspectPhotos",
+    static Scene inspectPhotos = new Scene.Builder("InspectPhotos",
             "You compare handwriting and objects across all the photos.\n" +
                     "If any object matches something found elsewhere, that character's suspicion rises.\n\n" +
                     "You carefully note everything and take the photos most relevant to your theory.")
@@ -572,7 +572,7 @@ public class Scene {
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
             .setTriggersFinalGathering(true)
             .build();
-    Scene arguePhoto = new Scene.Builder("ArguePhoto",
+    static Scene arguePhoto = new Scene.Builder("ArguePhoto",
             "The arguing photo is striking.\n" +
                     "The person the victim argued with — if they match another clue — becomes critical evidence.\n\n" +
                     "You may only press the emergency button if two other clues connect logically.")
@@ -581,7 +581,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene leaveTheTrunk = new Scene.Builder("LeaveTheTrunk",
+    static Scene leaveTheTrunk = new Scene.Builder("LeaveTheTrunk",
             "You leave the photos untouched.\n" +
                     "The killer might return later to destroy or plant more evidence.\n" +
                     "Future events may become harder — you have lost potential deduction points.")
@@ -589,7 +589,7 @@ public class Scene {
             .addChoice(new Choice("Go back downstairs", "OpenSceneForFriend"))
             .build();
 
-    Scene checkLetters = new Scene.Builder("CheckLetters",
+    static Scene checkLetters = new Scene.Builder("CheckLetters",
             "A neat pile of letters tied with black ribbon sits in the corner.\n" +
                     "Inside:\n" +
                     "- Threat letters addressed to the victim.\n" +
@@ -601,7 +601,7 @@ public class Scene {
             .addChoice(new Choice("Leave the letters untouched", "LeaveLetters"))
             .build();
 
-    Scene readAllLetters = new Scene.Builder("ReadAllLetters",
+    static Scene readAllLetters = new Scene.Builder("ReadAllLetters",
             "You read every letter carefully.\n" +
                     "Each one reveals motive and pattern.\n" +
                     "When you connect the right letter to physical evidence, the killer's method and motive emerge.")
@@ -615,7 +615,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene takeThreatLetter = new Scene.Builder("TakeThreatLetter",
+    static Scene takeThreatLetter = new Scene.Builder("TakeThreatLetter",
             "The letter reads:\n" +
                     "'He saw too much. Tonight ends it all. - M'\n\n" +
                     "If M is the killer, this is primary evidence.\n" +
@@ -626,7 +626,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene leaveLetters = new Scene.Builder("LeaveLetters",
+    static Scene leaveLetters = new Scene.Builder("LeaveLetters",
             "You leave the letters untouched.\n" +
                     "The killer may return later to remove or tamper with them.\n" +
                     "You miss a clue that could have linked method to motive.")
@@ -636,7 +636,7 @@ public class Scene {
 
     // Bathrooom Branch
 
-    Scene goToBathroom = new Scene.Builder("GoToBathroom",
+    static Scene goToBathroom = new Scene.Builder("GoToBathroom",
             "You step into the upstairs bathroom. The light hums faintly.\n" +
                     "The mirror is slightly fogged — even though no one has showered.\n" +
                     "The air smells faintly of something sweet.\n\n" +
@@ -651,7 +651,7 @@ public class Scene {
             .addChoice(new Choice("Examine the stain", "ExamineStain"))
             .build();
 
-    Scene examinePillBottle = new Scene.Builder("ExaminePillBottle",
+    static Scene examinePillBottle = new Scene.Builder("ExaminePillBottle",
             "You kneel beside the trash.\n" +
                     "The label reads: 'Beta blockers — prescribed to the victim.'\n" +
                     "But the pills inside are not the same color as before. They were white. These are pale pink.\n\n" +
@@ -664,7 +664,7 @@ public class Scene {
             .addChoice(new Choice("Examine the stain", "ExamineStain"))
             .build();
 
-    Scene hideBottle = new Scene.Builder("HideBottle",
+    static Scene hideBottle = new Scene.Builder("HideBottle",
             "You pocket the tampered medication.\n" +
                     "If the killer used poison, they will later notice it missing — your danger level increases.\n" +
                     "If they did not, the evidence weakens your credibility.\n\n" +
@@ -675,7 +675,7 @@ public class Scene {
             .addChoice(new Choice("Go to the Attic", "GoToAttic"))
             .build();
 
-    Scene leaveBottle = new Scene.Builder("LeaveBottle",
+    static Scene leaveBottle = new Scene.Builder("LeaveBottle",
             "You carefully place everything back.\n" +
                     "If the killer returns to destroy evidence, you may later catch them.\n\n" +
                     "As you leave, you see someone entering the hallway from the stairs.")
@@ -685,7 +685,7 @@ public class Scene {
             .addChoice(new Choice("Run away", "RunFromHallway"))
             .build();
 
-    Scene catchHallwayPerson = new Scene.Builder("CatchHallwayPerson",
+    static Scene catchHallwayPerson = new Scene.Builder("CatchHallwayPerson",
             "You slowly re-enter the bathroom.\n" +
                     "Someone is in here. Their suspicion meter rises.\n\n" +
                     "You don't know yet if this is the killer.\n" +
@@ -709,7 +709,7 @@ public class Scene {
             .addChoice(new Choice("Confront them", "ConfrontHallwayPerson"))
             .build();
 
-    Scene confrontHallwayPerson = new Scene.Builder("ConfrontHallwayPerson",
+    static Scene confrontHallwayPerson = new Scene.Builder("ConfrontHallwayPerson",
             "You step toward them.\n" +
                     "They freeze — then their expression shifts.\n\n" +
                     "If it is the killer, your presence here is very dangerous.\n" +
@@ -734,14 +734,14 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene escapeHallway = new Scene.Builder("EscapeHallway",
+    static Scene escapeHallway = new Scene.Builder("EscapeHallway",
             "You run. You barely make it out.\n" +
                     "The hallway is empty now. You are shaken but alive.")
             .addChoice(new Choice("Go to the Study", "GoToStudy"))
             .addChoice(new Choice("Go to the Attic", "GoToAttic"))
             .build();
 
-    Scene stayHallway = new Scene.Builder("StayHallway",
+    static Scene stayHallway = new Scene.Builder("StayHallway",
             "You stand stiffly behind the door, trying to listen.\n" +
                     "They suddenly stop. The door flings open.\n\n" +
                     "You've been caught. If this is the killer — things are very bad.\n" +
@@ -765,13 +765,13 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene runFromHallway = new Scene.Builder("RunFromHallway",
+    static Scene runFromHallway = new Scene.Builder("RunFromHallway",
             "You decide to run. You head toward safety.")
             .addChoice(new Choice("Go to the Attic", "GoToAttic"))
             .addChoice(new Choice("Go to the Study", "GoToStudy"))
             .build();
 
-    Scene examineTowel = new Scene.Builder("ExamineTowel",
+    static Scene examineTowel = new Scene.Builder("ExamineTowel",
             "A white hand towel hangs near the sink — but it is not fully white.\n" +
                     "There is faint pink discoloration near the edge. Not blood. Not quite.\n" +
                     "When you touch it, it smells bitter. Almonds.\n\n" +
@@ -784,7 +784,7 @@ public class Scene {
             .addChoice(new Choice("Smell the towel more carefully", "SmellTowel"))
             .build();
 
-    Scene takeTowel = new Scene.Builder("TakeTowel",
+    static Scene takeTowel = new Scene.Builder("TakeTowel",
             "You pocket the towel.\n" +
                     "If the killer used poison, they will notice it missing — danger level rises.\n" +
                     "If not, you appear paranoid later during accusations.\n\n" +
@@ -797,7 +797,7 @@ public class Scene {
             .addChoice(new Choice("Pretend you saw nothing", "IgnoreHallwayPerson"))
             .build();
 
-    Scene ignoreHallwayPerson = new Scene.Builder("IgnoreHallwayPerson",
+    static Scene ignoreHallwayPerson = new Scene.Builder("IgnoreHallwayPerson",
             "You walk past as if nothing happened.\n" +
                     "They don't stop you.\n" +
                     "You may continue your investigation.")
@@ -805,7 +805,7 @@ public class Scene {
             .addChoice(new Choice("Go to the Attic", "GoToAttic"))
             .build();
 
-    Scene smellTowel = new Scene.Builder("SmellTowel",
+    static Scene smellTowel = new Scene.Builder("SmellTowel",
             "You inhale deeply. Bad choice.\n" +
                     "Your vision swims slightly.\n" +
                     "If the killer used contact-transfer poison, your health begins declining.\n" +
@@ -816,7 +816,7 @@ public class Scene {
             .addChoice(new Choice("Listen carefully", "ListenAtDoor"))
             .build();
 
-    Scene openDoorSuddenly = new Scene.Builder("OpenDoorSuddenly",
+    static Scene openDoorSuddenly = new Scene.Builder("OpenDoorSuddenly",
             "You catch two people talking — the Cousin and the Older Sister.\n" +
                     "They stop mid-sentence.\n" +
                     "'Did you move it?'\n" +
@@ -828,7 +828,7 @@ public class Scene {
             .addChoice(new Choice("Go to the Attic", "GoToAttic"))
             .build();
 
-    Scene listenAtDoor = new Scene.Builder("ListenAtDoor",
+    static Scene listenAtDoor = new Scene.Builder("ListenAtDoor",
             "You only hear one set of footsteps.\n" +
                     "Which means someone was pretending to whisper.\n\n" +
                     "Psychological manipulation route unlocked.\n" +
@@ -838,7 +838,7 @@ public class Scene {
             .addChoice(new Choice("Go to the Attic", "GoToAttic"))
             .build();
 
-    Scene examineStain = new Scene.Builder("ExamineStain",
+    static Scene examineStain = new Scene.Builder("ExamineStain",
             "There's something near the base of the bathtub.\n" +
                     "Dark. Almost wiped. Not red. Brownish.\n" +
                     "You kneel closer. It's not blood — it's vomit residue.\n\n" +
@@ -851,7 +851,7 @@ public class Scene {
             .addChoice(new Choice("Follow the scrape marks", "FollowScrapeMarks"))
             .build();
 
-    Scene touchResidue = new Scene.Builder("TouchResidue",
+    static Scene touchResidue = new Scene.Builder("TouchResidue",
             "You use a tissue. Inside it you find something metallic.\n" +
                     "A cufflink. Engraved initials.\n\n" +
                     "If the initials match the killer — suspicion rises sharply.\n" +
@@ -876,7 +876,7 @@ public class Scene {
             .addChoice(new Choice("Leave it where it is", "LeaveCufflink"))
             .build();
 
-    Scene keepCufflink = new Scene.Builder("KeepCufflink",
+    static Scene keepCufflink = new Scene.Builder("KeepCufflink",
             "You pocket the cufflink.\n" +
                     "If it belongs to the real killer — they will panic later.\n" +
                     "If it was planted — the real killer may try to frame you.")
@@ -885,14 +885,14 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene leaveCufflink = new Scene.Builder("LeaveCufflink",
+    static Scene leaveCufflink = new Scene.Builder("LeaveCufflink",
             "You leave the cufflink in place.\n" +
                     "You may later catch someone trying to retrieve it.")
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene followScrapeMarks = new Scene.Builder("FollowScrapeMarks",
+    static Scene followScrapeMarks = new Scene.Builder("FollowScrapeMarks",
             "The scrape marks lead toward the hallway — then stop abruptly.\n" +
                     "The carpet has been replaced. Fresh fibers.\n\n" +
                     "Logical deduction: the killer was calm. This was not impulsive.\n" +
@@ -903,7 +903,7 @@ public class Scene {
             .addChoice(new Choice("Stand your ground", "StandGround"))
             .build();
 
-    Scene hideInCloset = new Scene.Builder("HideInCloset",
+    static Scene hideInCloset = new Scene.Builder("HideInCloset",
             "You slip into the linen closet and pull the door shut.\n" +
                     "You overhear:\n" +
                     "'If they find the amendment, we're finished.'\n\n" +
@@ -916,7 +916,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene standGround = new Scene.Builder("StandGround",
+    static Scene standGround = new Scene.Builder("StandGround",
             "You stand still as whoever descends the stairs sees you investigating.\n\n" +
                     "If it is the killer, your final ending becomes confrontation-based.\n" +
                     "You cannot win through guessing — only through accumulated logic.")
@@ -926,7 +926,7 @@ public class Scene {
             .build();
 
     //OLDER SISTER
-    Scene openSceneSister = new Scene.Builder("OpenSceneForSister",
+    static Scene openSceneSister = new Scene.Builder("OpenSceneForSister",
             "The kitchen is eerily silent.\n" +
                     "The dinner plates have been cleared, but the lingering smell of herbs and something sharper hangs in the air.\n" +
                     "On the counter, a kitchen knife rests beside the cutting board. It is clean. Too clean.\n" +
@@ -944,7 +944,7 @@ public class Scene {
             .setDangerLevel(1)
             .build();
 
-    Scene goToPantry = new Scene.Builder("GoToPantry",
+    static Scene goToPantry = new Scene.Builder("GoToPantry",
             "Between the bread loaves on the shelf, you spot a crumpled note.\n" +
                     "You smooth it out under the dim light.\n\n" +
                     "\"You searched for steel and crimson thread,\n" +
@@ -959,7 +959,7 @@ public class Scene {
             .addChoice(new Choice("Run in the other direction", "RunFromArguing"))
             .build();
 
-    Scene investigateArguing = new Scene.Builder("InvestigateArguing",
+    static Scene investigateArguing = new Scene.Builder("InvestigateArguing",
             "You creep upstairs and press your ear to the door.\n" +
                     "Inside, your parents argue in hushed, furious tones.\n\n" +
                     "\"If they find the amendment, we look guilty. Both of us.\"\n" +
@@ -971,7 +971,7 @@ public class Scene {
             .addChoice(new Choice("Confront them", "ConfrontParents"))
             .build();
 
-    Scene recordParents = new Scene.Builder("RecordParents",
+    static Scene recordParents = new Scene.Builder("RecordParents",
             "You pull out your phone and begin recording through the gap in the door.\n" +
                     "But your hand brushes the frame. A creak. Silence from inside.\n" +
                     "The door swings open. They have seen you.\n" +
@@ -989,7 +989,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene confrontParents = new Scene.Builder("ConfrontParents",
+    static Scene confrontParents = new Scene.Builder("ConfrontParents",
             "You push the door open. They freeze mid-sentence.\n\n" +
                     "\"What did you hear?\"\n\n" +
                     "You press them. Your father looks at your mother. Your mother looks at the floor.\n\n" +
@@ -1007,7 +1007,7 @@ public class Scene {
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
             .build();
 
-    Scene runFromArguing = new Scene.Builder("RunFromArguing",
+    static Scene runFromArguing = new Scene.Builder("RunFromArguing",
             "You turn and move quickly down the hallway.\n" +
                     "The voices fade behind you.\n" +
                     "The corridor splits ahead — one direction leads to the back stairwell, the other toward the exit.")
@@ -1015,7 +1015,7 @@ public class Scene {
             .addChoice(new Choice("Go to the Nursery", "GoToNursery"))
             .build();
 
-    Scene sisterExitOption = new Scene.Builder("SisterExitOption",
+    static Scene sisterExitOption = new Scene.Builder("SisterExitOption",
             "The back door stands before you. Cool night air bleeds through the gap at the bottom.\n" +
                     "Freedom. Safety.\n\n" +
                     "But the killer is still in this house.\n\n" +
@@ -1025,7 +1025,7 @@ public class Scene {
             .addChoice(new Choice("Go back and investigate", "GoToNursery"))
             .build();
 
-    Scene goToNursery = new Scene.Builder("GoToNursery",
+    static Scene goToNursery = new Scene.Builder("GoToNursery",
             "You ease open the nursery door.\n" +
                     "The room smells of talcum powder and something faintly chemical beneath it.\n" +
                     "A single lamp casts long shadows over the crib and the old wardrobe in the corner.\n\n" +
@@ -1039,7 +1039,7 @@ public class Scene {
             .addChoice(new Choice("Look at the photographs", "CheckNurseryPhotos"))
             .build();
 
-    Scene checkCrib = new Scene.Builder("CheckCrib", "You reach behind the crib and feel something stiff and cold.\n" +
+    static Scene checkCrib = new Scene.Builder("CheckCrib", "You reach behind the crib and feel something stiff and cold.\n" +
             "A hidden bundle of cash — bound with a rubber band.\n\n" +
             "You remember the Family Friend leaning over the crib earlier during the house tour.\n" +
             "Laughing. Pretending to admire it.\n\n" +
@@ -1050,7 +1050,7 @@ public class Scene {
             .addChoice(new Choice("Open the wardrobe", "OpenWardrobeWithPresence"))
             .build();
 
-    Scene openWardrobeWithPresence = new Scene.Builder("OpenWardrobeWithPresence", "You pull the wardrobe door open.\n\n" +
+    static Scene openWardrobeWithPresence = new Scene.Builder("OpenWardrobeWithPresence", "You pull the wardrobe door open.\n\n" +
             "Your cousin stands inside, clutching a glass vial.\n\n" +
             "His eyes go wide. So do yours.\n\n" +
             "For a moment neither of you move.\n\n" +
@@ -1077,7 +1077,7 @@ public class Scene {
             .addChoice(new Choice("Investigate further first", "GoToStudySister"))
             .build();
 
-    Scene checkWardrobe = new Scene.Builder("CheckWardrobe",         "You open the wardrobe carefully.\n" +
+    static Scene checkWardrobe = new Scene.Builder("CheckWardrobe",         "You open the wardrobe carefully.\n" +
             "Clothes hang neatly — but tucked behind a winter coat is a glass vial.\n" +
             "Dark liquid inside. A faint chemical scent.\n\n" +
             "You pick it up. Scratched into the glass: 'Stage One.'\n\n" +
@@ -1089,7 +1089,7 @@ public class Scene {
             .addChoice(new Choice("Accuse him immediately", "Final Gathering"))
             .build();
 
-    Scene hideVialFromCousin = new Scene.Builder("HideVialFromCousin",
+    static Scene hideVialFromCousin = new Scene.Builder("HideVialFromCousin",
             "You slip the vial into your pocket just as he enters.\n\n" +
                     "He looks at you. Then at the wardrobe. His eyes narrow.\n\n" +
                     "\"You're in here alone?\"\n\n" +
@@ -1114,28 +1114,28 @@ public class Scene {
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
             .build();
 
-    Scene checkNurseryPhotos = new Scene.Builder("CheckNurseryPhotos",
+    static Scene checkNurseryPhotos = new Scene.Builder("CheckNurseryPhotos",
             "You flip through the photographs on the side table.\n" +
-            "Most are old family portraits — but two stand out:\n" +
-            "- A photo of the victim mid-argument behind a closed door.\n" +
-            "- A torn photo with only the bottom half remaining.\n\n" +
-            "Written faintly on the back of the torn photo:\n" +
-            "'Some memories die harder than people.'")
+                    "Most are old family portraits — but two stand out:\n" +
+                    "- A photo of the victim mid-argument behind a closed door.\n" +
+                    "- A torn photo with only the bottom half remaining.\n\n" +
+                    "Written faintly on the back of the torn photo:\n" +
+                    "'Some memories die harder than people.'")
             .addInventorySystem("nurseryPhotoCollection")
             .addSuspicionChange(NextStatementIsALie.characterNames.cousin, 1)
             .addChoice(new Choice("Go to the Study", "GoToStudySister"))
             .addChoice(new Choice("Go to the Wine Cellar", "GoToCellar"))
             .build();
 
-    Scene goToCellar = new Scene.Builder("GoToCellar",
+    static Scene goToCellar = new Scene.Builder("GoToCellar",
             "You descend the creaking staircase to the cellar.\n" +
-            "A single bulb swings above you — as if someone was here moments ago.\n" +
-            "The smell of damp stone and aged wine is undercut by something faintly chemical.\n\n" +
-            "You notice three things immediately:\n" +
-            "- A broken wine glass on the floor.\n" +
-            "- A muddy footprint near the back wall.\n" +
-            "- One wine rack slightly pulled forward.\n\n" +
-            "Your uncle prides himself on this cellar. He never lets anyone touch the collection.")
+                    "A single bulb swings above you — as if someone was here moments ago.\n" +
+                    "The smell of damp stone and aged wine is undercut by something faintly chemical.\n\n" +
+                    "You notice three things immediately:\n" +
+                    "- A broken wine glass on the floor.\n" +
+                    "- A muddy footprint near the back wall.\n" +
+                    "- One wine rack slightly pulled forward.\n\n" +
+                    "Your uncle prides himself on this cellar. He never lets anyone touch the collection.")
             .addInventorySystem("brokenWineGlass")
             .addInventorySystem("footprintPhotograph")
             .addSuspicionChange(NextStatementIsALie.characterNames.uncle, 1)
@@ -1145,7 +1145,7 @@ public class Scene {
             .addChoice(new Choice("Inspect the broken wine glass", "InspectBrokenGlass"))
             .build();
 
-    Scene examineCellarRack = new Scene.Builder("ExamineCellarRack",
+    static Scene examineCellarRack = new Scene.Builder("ExamineCellarRack",
             "You pull the rack further from the wall.\n" +
                     "Behind it: a small metal box, already forced open.\n" +
                     "Inside — nothing. Except a faint smell.\n" +
@@ -1157,7 +1157,7 @@ public class Scene {
             .addChoice(new Choice("stay silent and look for another exit", "FindCellarPassage"))
             .build();
 
-    Scene bangCellarDoor = new Scene.Builder("BangCellarDoor",
+    static Scene bangCellarDoor = new Scene.Builder("BangCellarDoor",
             "After several seconds, the door opens.\n" +
                     "It is your father. He looks annoyed — not concerned.\n\n" +
                     "\"Why are you snooping alone down here?\"\n\n" +
@@ -1167,7 +1167,7 @@ public class Scene {
             .addChoice(new Choice("Apologise and lie", "LieFatherCellar"))
             .build();
 
-    Scene accuseFatherDirectly = new Scene.Builder("AccuseFatherCellar",
+    static Scene accuseFatherDirectly = new Scene.Builder("AccuseFatherCellar",
             "You say it plainly: \"You locked me in here.\"\n\n" +
                     "He goes very still.")
             .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
@@ -1189,7 +1189,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene lieFatherCellar = new Scene.Builder("LieFatherCellar",
+    static Scene lieFatherCellar = new Scene.Builder("LieFatherCellar",
             "\"I was looking for wine,\" you say. \"The door must have caught.\"\n\n" +
                     "He studies you for a beat too long. Then he leaves.\n\n" +
                     "You may continue exploring.")
@@ -1212,21 +1212,21 @@ public class Scene {
             .addChoice(new Choice("Inspect the broken glass", "InspectBrokenGlass"))
             .build();
 
-    Scene findCellarPassage = new Scene.Builder("FindCellarPassage",
+    static Scene findCellarPassage = new Scene.Builder("FindCellarPassage",
             "You find a servant passage behind the barrels. It leads upward.\n" +
-            "Two voices whisper somewhere close.\n\n" +
-            "You recognise your mother — and the Family Friend.\n\n" +
-            "Fragments only:\n" +
-            "\"...should have waited...\"\n" +
-            "\"...wasn't part of the plan...\"\n" +
-            "\"Too late now...\"")
+                    "Two voices whisper somewhere close.\n\n" +
+                    "You recognise your mother — and the Family Friend.\n\n" +
+                    "Fragments only:\n" +
+                    "\"...should have waited...\"\n" +
+                    "\"...wasn't part of the plan...\"\n" +
+                    "\"Too late now...\"")
             .addSuspicionChange(NextStatementIsALie.characterNames.mother, 1)
             .addSuspicionChange(NextStatementIsALie.characterNames.familyFriend, 1)
             .addChoice(new Choice("Reveal yourself", "RevealCellarPassage"))
             .addChoice(new Choice("Record the conversation secretly", "RecordCellarPassage"))
             .build();
 
-    Scene revealCellarPassage = new  Scene.Builder("RevealCellarPassage",
+    static Scene revealCellarPassage = new  Scene.Builder("RevealCellarPassage",
             "They stop the moment they see you.\n\n" +
                     "If either is the killer, they attempt to push you down the stairs.\n" +
                     "You must guess which one.\n\n" +
@@ -1252,7 +1252,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene recordCellarPassage = new Scene.Builder("RecordCellarPassage",
+    static Scene recordCellarPassage = new Scene.Builder("RecordCellarPassage",
             "You stay hidden and record everything you can.\n\n" +
                     "If the killer is among them, this recording can be used at the Final Gathering for automatic confirmation.\n" +
                     "Their own words seal it.")
@@ -1263,7 +1263,7 @@ public class Scene {
             .addChoice(new Choice("Go the Final Gathering", "Final Gathering"))
             .build();
 
-    Scene followCellarFootprint = new Scene.Builder("FollowCellarFootprint",
+    static Scene followCellarFootprint = new Scene.Builder("FollowCellarFootprint",
             "The footprint leads to a section of the cellar rarely used.\n" +
                     "There is dirt on the floor — but it has not rained outside tonight.\n\n" +
                     "You find a hidden trapdoor under an old rug.\n\n" +
@@ -1273,7 +1273,7 @@ public class Scene {
             .addChoice(new Choice("Wait and confront whoever enters", "WaitInCellar"))
             .build();
 
-    Scene hideInTunnel = new Builder("HideInTunnel",
+    static Scene hideInTunnel = new Builder("HideInTunnel",
             "Someone enters the cellar. You see only their shoes through the gap.\n\n" +
                     "You must guess who it is.")
             .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
@@ -1297,7 +1297,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene waitInCellar = new Scene.Builder("WaitInCellar",
+    static Scene waitInCellar = new Scene.Builder("WaitInCellar",
             "You step back and stand your ground.\n\n" +
                     "The door opens. It is your cousin.\n" +
                     "He looks terrified — not guilty.\n" +
@@ -1307,7 +1307,7 @@ public class Scene {
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
             .build();
 
-    Scene trustCousin = new Scene.Builder("TrustCousin",
+    static Scene trustCousin = new Scene.Builder("TrustCousin",
             "You decide to believe him — for now.\n\n" +
                     "He tells you he saw someone enter the cellar carrying something wrapped in cloth.\n" +
                     "He couldn't see their face.\n\n" +
@@ -1333,14 +1333,14 @@ public class Scene {
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
             .build();
 
-    Scene inspectBrokenGlass = new Scene.Builder("InspectBrokenGlass",
+    static Scene inspectBrokenGlass = new Scene.Builder("InspectBrokenGlass",
             "You kneel beside the shattered glass.\n" +
-            "When you lean close, you catch it — bitter almonds.\n\n" +
-            "Your grandfather was allergic to almonds.\n\n" +
-            "This confirms the poison theory.\n\n" +
-            "Suddenly the cellar light goes out. Darkness.\n" +
-            "You feel someone behind you.\n\n" +
-            "You must choose instantly.")
+                    "When you lean close, you catch it — bitter almonds.\n\n" +
+                    "Your grandfather was allergic to almonds.\n\n" +
+                    "This confirms the poison theory.\n\n" +
+                    "Suddenly the cellar light goes out. Darkness.\n" +
+                    "You feel someone behind you.\n\n" +
+                    "You must choose instantly.")
             .addInventorySystem("almondScentObservation")
             .setDangerLevel(2)
             .addChoice(new Choice("Turn around", "CellarDarkTurnAround"))
@@ -1348,7 +1348,7 @@ public class Scene {
             .addChoice(new Choice("Stay perfectly still", "CellarDarkStill"))
             .build();
 
-    Scene cellarDarkTurnAround = new Scene.Builder("CellarDarkTurnAround",
+    static Scene cellarDarkTurnAround = new Scene.Builder("CellarDarkTurnAround",
             "You spin around and face the darkness.\n\n" +
                     "A hand reaches for you — then stops.\n\n" +
                     "You react instinctively and narrowly avoid being shoved.\n" +
@@ -1373,7 +1373,7 @@ public class Scene {
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
             .build();
 
-    Scene cellarDarkRun = new Scene.Builder("CellarDarkRun",
+    static Scene cellarDarkRun = new Scene.Builder("CellarDarkRun",
             "You bolt for the stairs.\n\n" +
                     "Your feet find the first step. You scramble up and burst into the hallway.\n" +
                     "Behind you — silence.\n\n" +
@@ -1397,7 +1397,7 @@ public class Scene {
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
             .build();
 
-    Scene cellarDarkStill = new Scene.Builder("CellarDarkStill",
+    static Scene cellarDarkStill = new Scene.Builder("CellarDarkStill",
             "You press yourself against the wall and go completely still.\n\n" +
                     "Footsteps move past you in the dark.\n" +
                     "A pause. Then they continue toward the stairs and up.\n\n" +
@@ -1422,13 +1422,13 @@ public class Scene {
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
             .build();
 
-    Scene goToStudySister = new Scene.Builder("GoToStudySister",
+    static Scene goToStudySister = new Scene.Builder("GoToStudySister",
             "You step into the study. The imposing desk dominates the room.\n" +
-            "It is half-open, as if someone left in a hurry.\n\n" +
-            "You see three things inside:\n" +
-            "- A revised will — dated yesterday.\n" +
-            "- A torn envelope.\n" +
-            "- A fountain pen, still uncapped.")
+                    "It is half-open, as if someone left in a hurry.\n\n" +
+                    "You see three things inside:\n" +
+                    "- A revised will — dated yesterday.\n" +
+                    "- A torn envelope.\n" +
+                    "- A fountain pen, still uncapped.")
             .addInventorySystem("revisedWill")
             .addInventorySystem("tornEnvelope")
             .addInventorySystem("A fountain pen, still uncapped")
@@ -1438,7 +1438,7 @@ public class Scene {
             .addChoice(new Choice("Hide the will and observe", "HideWillSister"))
             .build();
 
-    Scene readWillSister = new Scene.Builder("ReadWillSister",
+    static Scene readWillSister = new Scene.Builder("ReadWillSister",
             "You scan the names. It is the grandfather's will.\n\n" +
                     "A handwritten amendment — added this morning — changes the inheritance distribution.\n\n" +
                     "Whoever this harms most had the strongest motive.\n\n" +
@@ -1462,7 +1462,7 @@ public class Scene {
             .addChoice(new Choice("Hide the page before she sees it", "HideWillFromMother"))
             .build();
 
-    Scene confrontMotherWill = new Scene.Builder("ConfrontMotherWill",
+    static Scene confrontMotherWill = new Scene.Builder("ConfrontMotherWill",
             "You hold up the amendment page.\n\n" +
                     "She does not panic. Instead, she begins to cry — slowly, deliberately.\n" +
                     "She twists the story. She tries to make you doubt yourself.\n\n" +
@@ -1490,7 +1490,7 @@ public class Scene {
             .addChoice(new Choice("Go to the Wine Cellar", "GoToCellar"))
             .build();
 
-    Scene hideWillFromMother = new Scene.Builder("HideWillFromMother",
+    static Scene hideWillFromMother = new Scene.Builder("HideWillFromMother",
             "You fold the amendment page and slip it into your pocket before she can see it.\n\n" +
                     "She enters the room and pauses. Her eyes sweep the desk.\n" +
                     "Something is missing and she knows it.\n\n" +
@@ -1514,7 +1514,7 @@ public class Scene {
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
             .build();
 
-    Scene forceDrawer = new Scene.Builder("ForceDrawer",
+    static Scene forceDrawer = new Scene.Builder("ForceDrawer",
             "You force the locked drawer open.\n\n" +
                     "Inside:\n" +
                     "- An old revolver — unloaded.\n" +
@@ -1528,7 +1528,7 @@ public class Scene {
             .addChoice(new Choice("Call out from below", "CallOutFromStudy"))
             .build();
 
-    Scene goUpstairsGlass = new Scene.Builder("GoUpstairsGlass",   "You sprint upstairs and throw open the door.\n\n" +
+    static Scene goUpstairsGlass = new Scene.Builder("GoUpstairsGlass",   "You sprint upstairs and throw open the door.\n\n" +
             "Your father stands over your uncle.\n" +
             "Your uncle is unconscious — but breathing.\n\n" +
             "Your father turns. His expression is unreadable.")
@@ -1549,7 +1549,7 @@ public class Scene {
                     NextStatementIsALie.characterNames.familyFriend, 0, 2))
             .build();
 
-    Scene takeRevolver = new Scene.Builder("TakeRevolver",
+    static Scene takeRevolver = new Scene.Builder("TakeRevolver",
             "You pick up the revolver. You don't know it is unloaded.\n\n" +
                     "You go upstairs.\n" +
                     "The cousin and the Family Friend stand facing each other.\n" +
@@ -1579,7 +1579,7 @@ public class Scene {
             .setTriggersFinalGathering(true)
             .build();
 
-    Scene callOutFromStudy = new Scene.Builder("CallOutFromStudy",
+    static Scene callOutFromStudy = new Scene.Builder("CallOutFromStudy",
             "You call upstairs. The sounds go quiet. Footsteps.\n" +
                     "Your mother appears at the top of the stairs, looking down.\n\n" +
                     "\"There is nothing up here,\" she says.\n" +
@@ -1589,12 +1589,12 @@ public class Scene {
             .addChoice(new Choice("Stay put", "GoToCellar"))
             .build();
 
-    Scene hideWillSister = new Scene.Builder("HideWillSister",
+    static Scene hideWillSister = new Scene.Builder("HideWillSister",
             "You hide the will — not just a copy. The original goes into your pocket.\n\n" +
-            "You step back and wait.\n\n" +
-            "If the killer has an inheritance motive, they return to the study within the next scene\n" +
-            "and notice the will is missing.\n" +
-            "They accuse you publicly at the Final Gathering. Your suspicion rises.")
+                    "You step back and wait.\n\n" +
+                    "If the killer has an inheritance motive, they return to the study within the next scene\n" +
+                    "and notice the will is missing.\n" +
+                    "They accuse you publicly at the Final Gathering. Your suspicion rises.")
             .addInventorySystem("grandfathersWillOriginal")
             .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
                     NextStatementIsALie.characterNames.mother,
@@ -1615,7 +1615,7 @@ public class Scene {
             .addChoice(new Choice("Go to the Fireplace", "GoToFireplace"))
             .build();
 
-    Scene goToFireplace = new Scene.Builder("GoToFireplace", "You examine the dying embers in the sitting room fireplace.\n" +
+    static Scene goToFireplace = new Scene.Builder("GoToFireplace", "You examine the dying embers in the sitting room fireplace.\n" +
             "No one has passed through here recently — you are alone.\n\n" +
             "You find:\n" +
             "- A burned document fragment.\n" +
@@ -1626,7 +1626,7 @@ public class Scene {
             .addChoice(new Choice("Search the chimney", "SearchChimney"))
             .build();
 
-    Scene pieceDocument = new Scene.Builder("PieceDocument",
+    static Scene pieceDocument = new Scene.Builder("PieceDocument",
             "You carefully assemble the burned fragments.\n\n" +
                     "When complete, the text reads:\n" +
                     "\"Beneficiary changed to —\"\n\n" +
@@ -1652,7 +1652,7 @@ public class Scene {
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
             .build();
 
-    Scene searchChimney = new Scene.Builder("SearchChimney",
+    static Scene searchChimney = new Scene.Builder("SearchChimney",
             "You reach up inside the chimney flue and feel a small velvet pouch wedged against the wall.\n\n" +
                     "Inside: almond shavings.\n\n" +
                     "This directly implicates poison staging.\n\n" +
@@ -1677,13 +1677,13 @@ public class Scene {
             .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
             .build();
 
-    Scene stayInKitchen = new Scene.Builder("StayInKitchen",
+    static Scene stayInKitchen = new Scene.Builder("StayInKitchen",
             "You move deeper into the kitchen, staying out of sight.\n\n" +
-            "The door opens. Your cousin and the Family Friend enter, talking in urgent, low voices.\n\n" +
-            "\"Someone is going to figure it out...\"\n" +
-            "\"What are you going to do?\"\n\n" +
-            "You hold your breath behind the counter.\n\n" +
-            "They leave. You slip safely out of the kitchen.")
+                    "The door opens. Your cousin and the Family Friend enter, talking in urgent, low voices.\n\n" +
+                    "\"Someone is going to figure it out...\"\n" +
+                    "\"What are you going to do?\"\n\n" +
+                    "You hold your breath behind the counter.\n\n" +
+                    "They leave. You slip safely out of the kitchen.")
             .addSuspicionChange(NextStatementIsALie.characterNames.cousin, 1)
             .addSuspicionChange(NextStatementIsALie.characterNames.familyFriend, 1)
             .addChoice(new Choice("Go to the Study", "GoToStudySister"))
@@ -1693,7 +1693,7 @@ public class Scene {
 
     //FINAL GATHERING
 
-    Scene finalGathering = new Scene.Builder("Final Gathering",
+    static Scene finalGathering = new Scene.Builder("Final Gathering",
             "The remaining members of the family gather in the dimly lit sitting room.\n" +
                     "No one speaks at first. The fire has died down to embers.\n" +
                     "Every face is a mask — grief, fear, or something else entirely.\n\n" +
@@ -1752,7 +1752,7 @@ public class Scene {
 
 //Accusation outcomes
 
-    Scene accuseOutcomeMother = new Scene.Builder("AccuseOutcomeMother",
+    static Scene accuseOutcomeMother = new Scene.Builder("AccuseOutcomeMother",
             "You step forward. All eyes turn to you.\n\n" +
                     "\"It was you,\" you say, looking directly at the Mother.\n\n" +
                     "The room goes utterly still.\n\n" +
@@ -1760,7 +1760,7 @@ public class Scene {
                     "Then something shifts in her expression.")
             .build();
 
-    Scene accuseOutcomeFather = new Scene.Builder("AccuseOutcomeFather",
+    static Scene accuseOutcomeFather = new Scene.Builder("AccuseOutcomeFather",
             "You step forward. All eyes turn to you.\n\n" +
                     "\"It was you,\" you say, looking directly at the Father.\n\n" +
                     "The room goes utterly still.\n\n" +
@@ -1768,7 +1768,7 @@ public class Scene {
                     "Then something shifts in his expression.")
             .build();
 
-    Scene accuseOutcomeOlderSister = new Scene.Builder("AccuseOutcomeOlderSister",
+    static Scene accuseOutcomeOlderSister = new Scene.Builder("AccuseOutcomeOlderSister",
             "You step forward. All eyes turn to you.\n\n" +
                     "\"It was you,\" you say, looking directly at the Older Sister.\n\n" +
                     "The room goes utterly still.\n\n" +
@@ -1776,7 +1776,7 @@ public class Scene {
                     "Then something shifts in her expression.")
             .build();
 
-    Scene accuseOutcomeUncle = new Scene.Builder("AccuseOutcomeUncle",
+    static Scene accuseOutcomeUncle = new Scene.Builder("AccuseOutcomeUncle",
             "You step forward. All eyes turn to you.\n\n" +
                     "\"It was you,\" you say, looking directly at the Uncle.\n\n" +
                     "The room goes utterly still.\n\n" +
@@ -1784,7 +1784,7 @@ public class Scene {
                     "Then something shifts in his expression.")
             .build();
 
-    Scene accuseOutcomeCousin = new Scene.Builder("AccuseOutcomeCousin",
+    static Scene accuseOutcomeCousin = new Scene.Builder("AccuseOutcomeCousin",
             "You step forward. All eyes turn to you.\n\n" +
                     "\"It was you,\" you say, looking directly at the Cousin.\n\n" +
                     "The room goes utterly still.\n\n" +
@@ -1792,7 +1792,7 @@ public class Scene {
                     "Then something shifts in his expression.")
             .build();
 
-    Scene accuseOutcomeFamilyFriend = new Scene.Builder("AccuseOutcomeFamilyFriend",
+    static Scene accuseOutcomeFamilyFriend = new Scene.Builder("AccuseOutcomeFamilyFriend",
             "You step forward. All eyes turn to you.\n\n" +
                     "\"It was you,\" you say, looking directly at the Family Friend.\n\n" +
                     "The room goes utterly still.\n\n" +
@@ -1803,7 +1803,7 @@ public class Scene {
 // These are loaded by the GUI after processGuess() resolves,
 // based on endingType. One scene per endingType.
 
-    Scene endingCorrectGuessEscape = new Scene.Builder("EndingCorrectGuessEscape",
+    static Scene endingCorrectGuessEscape = new Scene.Builder("EndingCorrectGuessEscape",
             "The colour drains from their face.\n\n" +
                     "For a moment it looks like they might deny it.\n" +
                     "Then the evidence you have gathered closes around them\n" +
@@ -1816,7 +1816,7 @@ public class Scene {
                     "The truth cost something — but you made it out.")
             .build();
 
-    Scene endingCorrectGuessTooLate = new Scene.Builder("EndingCorrectGuessTooLate",
+    static Scene endingCorrectGuessTooLate = new Scene.Builder("EndingCorrectGuessTooLate",
             "You are right.\n\n" +
                     "You can see it in their eyes the moment you say it.\n" +
                     "But you said it too late.\n\n" +
@@ -1827,7 +1827,7 @@ public class Scene {
                     "You solved it. But it was not enough.")
             .build();
 
-    Scene endingWrongGuess = new Scene.Builder("EndingWrongGuess",
+    static Scene endingWrongGuess = new Scene.Builder("EndingWrongGuess",
             "The room erupts.\n\n" +
                     "The person you accused stares at you in disbelief — then in fury.\n" +
                     "The real killer watches from across the room, expression unreadable.\n\n" +
@@ -1836,7 +1836,7 @@ public class Scene {
                     "You were wrong. The night does not end well.")
             .build();
 
-    Scene endingEscapedUnsolved = new Scene.Builder("EndingEscapedUnsolved",
+    static Scene endingEscapedUnsolved = new Scene.Builder("EndingEscapedUnsolved",
             "You slip out the back door.\n\n" +
                     "The cold air hits you and you do not look back.\n" +
                     "Somewhere behind you, in that house, the killer is still there.\n" +
@@ -1845,7 +1845,7 @@ public class Scene {
                     "But the truth stays buried in that house tonight.")
             .build();
 
-    Scene endingEveryoneDead = new Scene.Builder("EndingEveryoneDead",
+    static Scene endingEveryoneDead = new Scene.Builder("EndingEveryoneDead",
             "The sitting room is silent.\n\n" +
                     "You look around at what remains.\n" +
                     "One by one, the night took them.\n\n" +
@@ -1855,4 +1855,60 @@ public class Scene {
                     "There is no one left to save.\n" +
                     "You survived — but there is nothing left to survive for.")
             .build();
+
+    //Ambush Scenes
+    static Scene ambushMother = new Scene.Builder("Ambush mother",
+            "She is behind you before you hear her move.\n\n" +
+                    "\"You've been very busy tonight,\" she says.\n" +
+                    "\"That was a mistake.\"\n\n" +
+                    "The Final Gathering is no longer a choice. It is now.")
+            .setDangerLevel(0)
+            .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .build();
+
+    static Scene ambushFather = new Scene.Builder("Ambush father",
+            "The lights go out.\n\n" +
+                    "You hear his voice from somewhere in the dark.\n" +
+                    "\"I gave you every chance to stay out of this.\"\n\n" +
+                    "The Final Gathering is no longer a choice. It is now.")
+            .setDangerLevel(0)
+            .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .build();
+
+    static Scene ambushOlderSister = new Scene.Builder("Ambush olderSister",
+            "She steps into the doorway and blocks your path.\n\n" +
+                    "\"You found things you were not supposed to find.\"\n" +
+                    "She smiles. It does not reach her eyes.\n\n" +
+                    "The Final Gathering is no longer a choice. It is now.")
+            .setDangerLevel(0)
+            .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .build();
+
+    static Scene ambushUncle = new Scene.Builder("Ambush uncle",
+            "He is waiting for you at the end of the corridor.\n\n" +
+                    "\"Clever,\" he says. \"Too clever.\"\n" +
+                    "He does not move. He does not need to.\n\n" +
+                    "The Final Gathering is no longer a choice. It is now.")
+            .setDangerLevel(0)
+            .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .build();
+
+    static Scene ambushCousin = new Scene.Builder("Ambush cousin",
+            "You turn the corner and he is right there.\n\n" +
+                    "\"I really hoped it wouldn't come to this,\" he says.\n" +
+                    "He looks almost sorry. Almost.\n\n" +
+                    "The Final Gathering is no longer a choice. It is now.")
+            .setDangerLevel(0)
+            .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .build();
+
+    static Scene ambushFamilyFriend = new Scene.Builder("Ambush familyFriend",
+            "They are standing in the kitchen when you walk in.\n\n" +
+                    "\"I always liked you,\" they say.\n" +
+                    "\"That is the only reason I am giving you a warning.\"\n\n" +
+                    "The Final Gathering is no longer a choice. It is now.")
+            .setDangerLevel(0)
+            .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .build();
+
 }
