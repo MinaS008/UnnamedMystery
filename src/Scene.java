@@ -135,6 +135,27 @@ public class Scene {
                 " danger=" + dangerLevel;
     }
 
+    //OPENING GATHERING
+    Scene openingGathering = new Scene.Builder("OpeningGathering",
+            "The countryside estate is silent except for the rain against the windows.\n\n" +
+                    "You are gathered in the living room — all of you.\n" +
+                    "The fire is low. The drinks have gone untouched.\n\n" +
+                    "Upstairs, your grandfather lies dead.\n\n" +
+                    "No one has called anyone yet. No one has moved toward the door.\n" +
+                    "The storm outside sees to that.\n\n" +
+                    "You look around the room:\n\n" +
+                    "Your MOTHER sits closest to the fire, hands folded, eyes down.\n" +
+                    "Your FATHER stands by the window, watching the rain.\n" +
+                    "Your OLDER SISTER has not sat down since they found him.\n" +
+                    "Your LITTLE BROTHER does not seem to understand what is happening.\n" +
+                    "Your UNCLE pours himself a drink he has not touched.\n" +
+                    "Your COUSIN is looking at his phone — or pretending to.\n" +
+                    "The FAMILY FRIEND hovers near the door, as if deciding something.\n\n" +
+                    "Someone in this room did this.\n\n" +
+                    "The question is who — and whether you will find out before they\n" +
+                    "decide that you know too much.\n\n" +
+                    "Choose your perspective wisely.")
+            .build();
 
     //FAMILY FRIEND
     Scene openSceneFriend = new Scene.Builder("OpenSceneForFriend",

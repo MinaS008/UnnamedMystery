@@ -93,6 +93,7 @@ public class NextStatementIsALie {
     }
 
     public void startGame() {
+        loadScene("OpeningGathering");
         gameState = gameState.characterSelect;
         notifyListeners(gameEvent.gameStarted);
     }
