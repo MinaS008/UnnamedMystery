@@ -8,16 +8,16 @@ import java.util.List;
 public class GameState extends JFrame implements NextStatementIsALie.gameListener {
 
     // Color scheme - Dark Mystery Theme
-    private static final Color BG_DARK = new Color(15, 15, 20);
-    private static final Color BG_PANEL = new Color(25, 25, 35);
-    private static final Color BG_HOVER = new Color(40, 40, 55);
-    private static final Color TEXT_PRIMARY = new Color(220, 215, 200);
-    private static final Color TEXT_SECONDARY = new Color(150, 145, 135);
-    private static final Color TEXT_DANGER = new Color(180, 60, 60);
-    private static final Color TEXT_SUCCESS = new Color(80, 160, 80);
-    private static final Color ACCENT_GOLD = new Color(180, 150, 90);
-    private static final Color ACCENT_RED = new Color(140, 50, 50);
-    private static final Color BORDER_COLOR = new Color(60, 55, 50);
+    private static final Color bgDark = new Color(15, 15, 20);
+    private static final Color bgPanel = new Color(25, 25, 35);
+    private static final Color bgHover = new Color(40, 40, 55);
+    private static final Color txtPrimary = new Color(220, 215, 200);
+    private static final Color txtSecondary = new Color(150, 145, 135);
+    private static final Color txtDanger = new Color(180, 60, 60);
+    private static final Color txtSuccess = new Color(80, 160, 80);
+    private static final Color accGold = new Color(180, 150, 90);
+    private static final Color accRed = new Color(140, 50, 50);
+    private static final Color border = new Color(60, 55, 50);
 
     // Typewriter settings
     private static final int TYPEWRITER_DELAY_SLOW = 45;
@@ -73,7 +73,7 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
         setSize(1200, 800);
         setMinimumSize(new Dimension(900, 600));
         setLocationRelativeTo(null);
-        setBackground(BG_DARK);
+        setBackground(bgDark);
 
         //Custom cursor for mystery feel
         try {
@@ -85,7 +85,7 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
 
     private void buildUI() {
         mainContainer = new JPanel(new BorderLayout());
-        mainContainer.setBackground(BG_DARK);
+        mainContainer.setBackground(bgDark);
 
         //Create glass overlay for transition
         glassOverlay = new JPanel() {
@@ -119,13 +119,13 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
 
     private void buildLeftPanel() {
         leftPanel = new JPanel(new BorderLayout(0, 0));
-        leftPanel.setBackground(BG_DARK);
+        leftPanel.setBackground(bgDark);
         leftPanel.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40));
 
         // Scene title at top
         sceneTitle = new JLabel("");
         sceneTitle.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 18));
-        sceneTitle.setForeground(ACCENT_GOLD);
+        sceneTitle.setForeground(accGold);
         sceneTitle.setHorizontalAlignment(SwingConstants.CENTER);
         sceneTitle.setBorder(BorderFactory.createEmptyBorder(0,0,20,0));
 
@@ -142,17 +142,17 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
 
     private void buildNarrativePanel() {
         narrativePanel = new JPanel(new BorderLayout());
-        narrativePanel.setBackground(BG_PANEL);
-        narrativePanel.setBorder(BorderFactory.createCompoundBorder(new LineBorder(BORDER_COLOR, 2),
+        narrativePanel.setBackground(bgPanel);
+        narrativePanel.setBorder(BorderFactory.createCompoundBorder(new LineBorder(border, 2),
                 BorderFactory.createEmptyBorder(25, 30, 25, 30)));
         narrativeText = new JTextArea();
         narrativeText.setFont(new Font("Georgia", Font.PLAIN, 17));
-        narrativeText.setForeground(TEXT_PRIMARY);
-        narrativeText.setBackground(BG_PANEL);
+        narrativeText.setForeground(txtPrimary);
+        narrativeText.setBackground(bgPanel);
         narrativeText.setLineWrap(true);
         narrativeText.setWrapStyleWord(true);
         narrativeText.setEditable(false);
-        narrativeText.setCaretColor(BG_PANEL);
+        narrativeText.setCaretColor(bgPanel);
         narrativeText.setBorder(null);
 
         narrativeText.addMouseListener(new MouseAdapter() {
@@ -165,9 +165,9 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
         });
 
         JScrollPane scrollPane = new JScrollPane(narrativeText);
-        scrollPane.setBackground(BG_PANEL);
+        scrollPane.setBackground(bgPanel);
         scrollPane.setBorder(null);
-        scrollPane.getViewport().setBackground(BG_PANEL);
+        scrollPane.getViewport().setBackground(bgPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -179,7 +179,7 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
     private void buildChoicePanel() {
         choicePanel = new JPanel();
         choicePanel.setLayout(new BoxLayout(choicePanel, BoxLayout.Y_AXIS));
-        choicePanel.setBackground(BG_DARK);
+        choicePanel.setBackground(bgDark);
         choicePanel.setBorder(BorderFactory.createEmptyBorder(25, 0, 0, 0));
 
         // Pre-create choice buttons
@@ -200,16 +200,16 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
                 if(getModel().isPressed()) {
-                    g2d.setColor(ACCENT_RED);
+                    g2d.setColor(accRed);
                 } else if(getModel().isRollover()) {
-                    g2d.setColor(BG_HOVER);
+                    g2d.setColor(bgHover);
                 } else {
-                    g2d.setColor(BG_PANEL);
+                    g2d.setColor(bgPanel);
                 }
                 g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 8, 8);
 
                 // Border
-                g2d.setColor(getModel().isRollover() ? ACCENT_GOLD : BORDER_COLOR);
+                g2d.setColor(getModel().isRollover() ? accGold : border);
                 g2d.setStroke(new BasicStroke(2));
                 g2d.drawRoundRect(1, 1, getWidth() - 3, getHeight() - 3, 8, 8);
 
@@ -219,8 +219,8 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
         };
 
         btn.setFont(new Font("Georgia", Font.PLAIN, 15));
-        btn.setForeground(TEXT_PRIMARY);
-        btn.setBackground(BG_PANEL);
+        btn.setForeground(txtPrimary);
+        btn.setBackground(bgPanel);
         btn.setFocusPainted(false);
         btn.setBorderPainted(false);
         btn.setContentAreaFilled(false);
@@ -233,13 +233,13 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
         btn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                btn.setForeground(ACCENT_GOLD);
+                btn.setForeground(accGold);
                 btn.repaint();
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                btn.setForeground(TEXT_PRIMARY);
+                btn.setForeground(txtPrimary);
                 btn.repaint();
             }
         });
@@ -250,19 +250,19 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
     private void buildCharacterSelectPanel() {
         characterSelectPanel = new JPanel();
         characterSelectPanel.setLayout(new BoxLayout(characterSelectPanel, BoxLayout.Y_AXIS));
-        characterSelectPanel.setBackground(BG_DARK);
+        characterSelectPanel.setBackground(bgDark);
         characterSelectPanel.setBorder(BorderFactory.createEmptyBorder(40, 80, 60, 80));
 
         // Titke
         JLabel title = new JLabel("THE NEXT STATEMENT IS A LIE");
         title.setFont(new Font("Serif", Font.BOLD, 42));
-        title.setForeground(TEXT_PRIMARY);
+        title.setForeground(txtPrimary);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Subtitle
         JLabel subtitle = new JLabel("A Murder Mystery");
         subtitle.setFont(new Font("Serif", Font.ITALIC, 22));
-        subtitle.setForeground(ACCENT_GOLD);
+        subtitle.setForeground(accGold);
         subtitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Flavor text panel
@@ -278,8 +278,8 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
                         "Choose your perspective wisely."
         );
         flavorText.setFont(new Font("Georgia", Font.ITALIC, 16));
-        flavorText.setForeground(TEXT_SECONDARY);
-        flavorText.setBackground(BG_DARK);
+        flavorText.setForeground(txtSecondary);
+        flavorText.setBackground(bgDark);
         flavorText.setEditable(false);
         flavorText.setLineWrap(true);
         flavorText.setWrapStyleWord(true);
@@ -289,7 +289,7 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
 
         //Character Buttons
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 0));
-        buttonPanel.setBackground(BG_DARK);
+        buttonPanel.setBackground(bgDark);
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         sisterButton = createCharacterButton("Older Sister",
@@ -332,21 +332,21 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
 
                 // background
                 if (getModel().isPressed()) {
-                    g2d.setColor(ACCENT_RED);
+                    g2d.setColor(accRed);
                 } else if (getModel().isRollover()) {
-                    g2d.setColor(BG_HOVER);
+                    g2d.setColor(bgHover);
                 } else {
-                    g2d.setColor(BG_PANEL);
+                    g2d.setColor(bgPanel);
                 }
                 g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 12, 12);
 
                 //Border with glow effect on hover
                 if (getModel().isRollover()) {
-                    g2d.setColor(new Color(ACCENT_GOLD.getRed(), ACCENT_GOLD.getGreen(), ACCENT_GOLD.getBlue(), 100));
+                    g2d.setColor(new Color(accGold.getRed(), accGold.getGreen(), accGold.getBlue(), 100));
                     g2d.setStroke(new BasicStroke(4));
                     g2d.drawRoundRect(2, 2, getWidth() - 5, getHeight() - 5, 12, 12);
                 }
-                g2d.setColor(getModel().isRollover() ? ACCENT_GOLD : BORDER_COLOR);
+                g2d.setColor(getModel().isRollover() ? accGold : border);
                 g2d.setStroke(new BasicStroke(2));
                 g2d.drawRoundRect(1, 1, getWidth() - 3, getHeight() - 3, 12, 12);
 
@@ -358,14 +358,14 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
 
                 //Name
                 g2d.setFont(new Font("Serif", Font.BOLD, 20));
-                g2d.setColor(getModel().isRollover() ? ACCENT_GOLD : TEXT_PRIMARY);
+                g2d.setColor(getModel().isRollover() ? accGold : txtPrimary);
                 FontMetrics fm = g2d.getFontMetrics();
                 int nameWidth = fm.stringWidth(name);
                 g2d.drawString(name, (getWidth() - nameWidth) / 2, 45);
 
                 //Description
                 g2d.setFont(new Font("Georgia", Font.ITALIC, 12));
-                g2d.setColor(TEXT_SECONDARY);
+                g2d.setColor(txtSecondary);
                 fm = g2d.getFontMetrics();
                 int descWidth = fm.stringWidth(description);
                 if(descWidth > getWidth() - 40) {
@@ -405,7 +405,7 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
         private void buildEndingPanel() {
         endingPanel = new JPanel();
         endingPanel.setLayout(new BoxLayout(endingPanel, BoxLayout.Y_AXIS));
-        endingPanel.setBackground(BG_DARK);
+        endingPanel.setBackground(bgDark);
         endingPanel.setBorder(BorderFactory.createEmptyBorder(80, 80, 80, 80));
     }
 
@@ -685,14 +685,14 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
                 message = "You identified the killer: " + game.getKillerReveal() + ".\n\n" +
                         "The truth is out. The guilty will face consequences. \n" +
                         "You survived the night.";
-                titleColor = TEXT_SUCCESS;
+                titleColor = txtSuccess;
                 break;
             case correctGuessTooLate:
                 title = "Pyrrhic Victory";
                 message = "You were right about " + game.getKillerReveal() + ".\n\n" +
                         "But you waited too long. The killer struck first. \n" +
                         "The truth dies with you.";
-                titleColor = ACCENT_GOLD;
+                titleColor = accGold;
                 break;
             case wrongGuess:
                 title = "Fatal Mistake";
@@ -700,7 +700,7 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
                 "The real killer was " + game.getKillerReveal() + ".\n" +
                         "They watched you condemn an innocent.\n" +
                         "Then they made sure you wouldn't make that mistake again.";
-                titleColor = TEXT_DANGER;
+                titleColor = txtDanger;
                 break;
             case escapedUnsolved:
                 title = "Escaped... But at what cost?";
@@ -708,7 +708,7 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
                         "The killer was " + game.getKillerReveal() + ".\n" +
                         "They remain free. The mystery unsolved.\n" +
                         "You'll always wonder if you could have stopped them.";
-                titleColor = TEXT_SECONDARY;
+                titleColor = txtSecondary;
                 break;
             case everyoneDead:
                 title = "Silence Falls";
@@ -716,12 +716,12 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
                         "The killer was " + game.getKillerReveal() + ".\n" +
                         "No one remains to tell the tale.\n" +
                         "Some secrets die with their keepers.";
-                titleColor = TEXT_DANGER;
+                titleColor = txtDanger;
                 break;
             default:
                 title = "Game Over";
                 message = "The mystery ends here.";
-                titleColor = TEXT_PRIMARY;
+                titleColor = txtPrimary;
         }
 
         JLabel titleLabel = new JLabel(title);
@@ -731,8 +731,8 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
 
         JTextArea messageText = new JTextArea(message);
         messageText.setFont(new Font("Georgia", Font.PLAIN, 18));
-        messageText.setForeground(TEXT_SECONDARY);
-        messageText.setBackground(BG_DARK);
+        messageText.setForeground(txtSecondary);
+        messageText.setBackground(bgDark);
         messageText.setEditable(false);
         messageText.setLineWrap(true);
         messageText.setWrapStyleWord(true);
@@ -802,8 +802,8 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
     private class DarkScrollBarUI extends javax.swing.plaf.basic.BasicScrollBarUI {
         @Override
         protected void configureScrollBarColors() {
-            this.thumbColor = BORDER_COLOR;
-            this.trackColor = BG_PANEL;
+            this.thumbColor = border;
+            this.trackColor = bgPanel;
         }
 
         @Override
@@ -841,16 +841,6 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
     }
 
     public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        SwingUtilities.invokeLater(() -> {
-            // Note: Would need scene registry to be built first
-            // This is just for testing the UI
-            System.out.println("GameState GUI initialized. Requires NextStatementIsALie instance with scene registry.");
-        });
+        
     }
 }
