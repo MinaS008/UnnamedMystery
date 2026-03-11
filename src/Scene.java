@@ -780,7 +780,7 @@ public class Scene {
                     "The killer tried to remove physical traces.\n\n" +
                     "You flip the towel over. There's foundation smeared into the corner. Not your shade.\n\n" +
                     "You hear a floorboard creak outside.")
-            .addInventorySystem("almondscentTowel")
+            .addInventorySystem("almondScentTowel")
             .addChoice(new Choice("Take the towel with you", "TakeTowel"))
             .addChoice(new Choice("Smell the towel more carefully", "SmellTowel"))
             .build();
@@ -1138,7 +1138,7 @@ public class Scene {
                     "- One wine rack slightly pulled forward.\n\n" +
                     "Your uncle prides himself on this cellar. He never lets anyone touch the collection.")
             .addInventorySystem("brokenWineGlass")
-            .addInventorySystem("footprintPhotograph")
+            .addInventorySystem("footprintPhoto")
             .addSuspicionChange(NextStatementIsALie.characterNames.uncle, 1)
             .setDangerLevel(1)
             .addChoice(new Choice("Examine the wine rack", "ExamineCellarRack"))
@@ -1764,7 +1764,6 @@ public class Scene {
             .build();
 
     //FINAL GATHERING
-
     static Scene finalGathering = new Scene.Builder("Final Gathering",
             "The remaining members of the family gather in the dimly lit sitting room.\n" +
                     "No one speaks at first. The fire has died down to embers.\n" +
@@ -1780,43 +1779,44 @@ public class Scene {
                     null,
                     null,
                     NextStatementIsALie.characterNames.mother,
-                    NextStatementIsALie.characterNames.mother, 0))
+                    null, 0))
             .addChoice(new Choice(
                     "Accuse the Father",
                     "AccuseOutcomeFather",
                     null,
                     null,
                     NextStatementIsALie.characterNames.father,
-                    NextStatementIsALie.characterNames.father, 0))
+                    null, 0))
             .addChoice(new Choice(
                     "Accuse the Older Sister",
                     "AccuseOutcomeOlderSister",
                     null,
-                    NextStatementIsALie.characterNames.familyFriend,  // only appears if playing as Family Friend,
+                    NextStatementIsALie.characterNames.familyFriend,  // only appears if playing as Family Friend
                     NextStatementIsALie.characterNames.olderSister,
-                    NextStatementIsALie.characterNames.olderSister, 0))
+                    null, 0))
             .addChoice(new Choice(
                     "Accuse the Uncle",
                     "AccuseOutcomeUncle",
                     null,
                     null,
                     NextStatementIsALie.characterNames.uncle,
-                    NextStatementIsALie.characterNames.uncle, 0))
+                    null, 0))
             .addChoice(new Choice(
                     "Accuse the Cousin",
                     "AccuseOutcomeCousin",
                     null,
                     null,
                     NextStatementIsALie.characterNames.cousin,
-                    NextStatementIsALie.characterNames.cousin, 0))
+                    null, 0))
             .addChoice(new Choice(
                     "Accuse the Family Friend",
                     "AccuseOutcomeFamilyFriend",
                     null,
-                    NextStatementIsALie.characterNames.olderSister,  // only appears if playing as OlderSister
+                    NextStatementIsALie.characterNames.olderSister,  // only appears if playing as Older Sister
                     NextStatementIsALie.characterNames.familyFriend,
-                    NextStatementIsALie.characterNames.familyFriend, 0))
+                    null, 0))
             .build();
+
 
 //Accusation outcomes
 

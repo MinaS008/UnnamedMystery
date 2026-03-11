@@ -51,9 +51,54 @@ public class Clue {
         register("inconsistencyNote",
                 "The dirt on the floor is new. But it hasn't rained recently, so there is no dirt outside.",
                 NextStatementIsALie.characterNames.uncle, 2);
-        register("revisedWIll",
+        register("revisedWill",
                 "The handwritten amendment was added this morning. Someone changed it... It is very suspicious",
                 NextStatementIsALie.characterNames.father, 3);
+        register("kitchenKnife",
+                "A kitchen knife wiped too clean. Someone scrubbed this deliberately.",
+                NextStatementIsALie.characterNames.mother, 2);
+        register("pantryRiddleNote",
+                "A riddle left in the pantry: 'No wound was carved — the silent killer made it rise alone.' Poison.",
+                NextStatementIsALie.characterNames.father, 2);
+        register("cousinAdmission",
+                "The cousin admitted: 'He found out what I was doing.' The victim was going to expose someone.",
+                NextStatementIsALie.characterNames.cousin, 2);
+        register("partialRecording",
+                "A partial recording of your parents arguing. They mentioned the amendment — both sounded afraid.",
+                NextStatementIsALie.characterNames.father, 2);
+        register("droppedVialNote",
+                "A vial dropped by the cousin as he fled. Whatever was inside, he didn't want it found.",
+                NextStatementIsALie.characterNames.cousin, 3);
+        register("nurseryPhotoCollection",
+                "Photos from the nursery — a mid-argument shot of the victim and a torn half-photo. 'Some memories die harder than people.'",
+                NextStatementIsALie.characterNames.cousin, 1);
+        register("partialCellarRecording",
+                "A secret recording from the cellar passage. Your mother and the Family Friend: '...wasn't part of the plan...'",
+                NextStatementIsALie.characterNames.mother, 2);
+        register("grandfathersWillOriginal",
+                "The original will, pocketed by you. Whoever it harms most had a motive — and they will notice it is gone.",
+                NextStatementIsALie.characterNames.father, 2);
+        register("allergyConfirmation",
+                "An official medical allergy report — confirms a fatal reaction to almonds. The poison method is now proven.",
+                NextStatementIsALie.characterNames.mother, 1);
+        register("familyPhotoCollection",
+                "A trunk of family photos — one shows the victim mid-argument, another is torn. Something is being hidden.",
+                NextStatementIsALie.characterNames.father, 1);
+        register("photoEvidence",
+                "Key photos from the trunk — cross-referenced with other evidence, they raise suspicion on the cousin.",
+                NextStatementIsALie.characterNames.cousin, 2);
+        register("clearVial",
+                "A clear vial labeled 'For him' found in the locked chest. Part of a two-stage poisoning plan.",
+                NextStatementIsALie.characterNames.cousin, 2);
+        register("blackCloak",
+                "A heavy black hooded cloak — recently worn, with a torn sleeve and a strand of dark hair inside.",
+                NextStatementIsALie.characterNames.olderSister, 2);
+        register("burnedDocumentFragment",
+                "A burned document fragment from the fireplace. Partially readable: 'Beneficiary changed to —' The name is ash.",
+                NextStatementIsALie.characterNames.father, 2);
+        register("almondScentObservation",
+                "The broken wine glass smells of bitter almonds. Grandfather was fatally allergic — this confirms poison.",
+                NextStatementIsALie.characterNames.uncle, 2);
         register("tornEnvelope",
                 "A torn envelope on the grandfather's desk. Something was sent - or received - in secret.",
                 NextStatementIsALie.characterNames.cousin, 1);
