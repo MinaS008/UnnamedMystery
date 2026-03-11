@@ -189,7 +189,7 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
         choicePanel.setBorder(BorderFactory.createEmptyBorder(25, 0, 0, 0));
 
         // Pre-create choice buttons
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 6; i++) {
             JButton btn = createChoiceButton("");
             btn.setVisible(false);
             choiceButtons.add(btn);

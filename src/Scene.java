@@ -1709,42 +1709,42 @@ public class Scene {
                     null,
                     null,
                     NextStatementIsALie.characterNames.mother,
-                    NextStatementIsALie.characterNames.mother, 3))
+                    NextStatementIsALie.characterNames.mother, 0))
             .addChoice(new Choice(
                     "Accuse the Father",
                     "AccuseOutcomeFather",
                     null,
                     null,
                     NextStatementIsALie.characterNames.father,
-                    NextStatementIsALie.characterNames.father, 3))
+                    NextStatementIsALie.characterNames.father, 0))
             .addChoice(new Choice(
                     "Accuse the Older Sister",
                     "AccuseOutcomeOlderSister",
                     null,
                     NextStatementIsALie.characterNames.familyFriend,  // only appears if playing as Family Friend,
                     NextStatementIsALie.characterNames.olderSister,
-                    NextStatementIsALie.characterNames.olderSister, 3))
+                    NextStatementIsALie.characterNames.olderSister, 0))
             .addChoice(new Choice(
                     "Accuse the Uncle",
                     "AccuseOutcomeUncle",
                     null,
                     null,
                     NextStatementIsALie.characterNames.uncle,
-                    NextStatementIsALie.characterNames.uncle, 3))
+                    NextStatementIsALie.characterNames.uncle, 0))
             .addChoice(new Choice(
                     "Accuse the Cousin",
                     "AccuseOutcomeCousin",
                     null,
                     null,
                     NextStatementIsALie.characterNames.cousin,
-                    NextStatementIsALie.characterNames.cousin, 3))
+                    NextStatementIsALie.characterNames.cousin, 0))
             .addChoice(new Choice(
                     "Accuse the Family Friend",
                     "AccuseOutcomeFamilyFriend",
                     null,
                     NextStatementIsALie.characterNames.olderSister,  // only appears if playing as OlderSister
                     NextStatementIsALie.characterNames.familyFriend,
-                    NextStatementIsALie.characterNames.familyFriend, 3))
+                    NextStatementIsALie.characterNames.familyFriend, 0))
             .build();
 
 //Accusation outcomes
