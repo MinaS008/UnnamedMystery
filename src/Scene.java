@@ -1046,7 +1046,7 @@ public class Scene {
             "Laughing. Pretending to admire it.\n\n" +
             "Was he looking for this?\n\n" +
             "The wardrobe door creaks behind you. You hold your breath.")
-            .addInventorySystem("Hidden cash bundle")
+            .addInventorySystem("hiddenCash")
             .addSuspicionChange(NextStatementIsALie.characterNames.familyFriend, 1)
             .addChoice(new Choice("Open the wardrobe", "OpenWardrobeWithPresence"))
             .build();
@@ -1292,11 +1292,80 @@ public class Scene {
             .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
                     NextStatementIsALie.characterNames.father,
                     NextStatementIsALie.characterNames.father, 0, 3))
-            .addChoice(new Choice("Guess it is the Uncle", "Final Gathering"))
-            .addChoice(new Choice("Guess it is the Cousin", "Final Gathering"))
-            .addChoice(new Choice("Guess it is the Family Friend", "Final Gathering"))
+            .addChoice(new Choice("Guess it is the Uncle", "HideInTunnelGuessUncle"))
+            .addChoice(new Choice("Guess it is the Cousin", "HideInTunnelGuessCousin"))
+            .addChoice(new Choice("Guess it is the Family Friend", "HideInTunnelGuessFamilyFriend"))
+            .build();
+
+    static Scene hideInTunnelGuessUncle = new Scene.Builder("HideInTunnelGuessUncle",
+            "You focus on the shoes — worn leather, formal. That's the uncle's style.\n\n" +
+                    "You hold your breath and wait for them to leave.")
+            .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
+                    NextStatementIsALie.characterNames.uncle,
+                    NextStatementIsALie.characterNames.uncle, 2, 0))
+            .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
+                    NextStatementIsALie.characterNames.cousin,
+                    NextStatementIsALie.characterNames.cousin, 0, 2))
+            .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
+                    NextStatementIsALie.characterNames.familyFriend,
+                    NextStatementIsALie.characterNames.familyFriend, 0, 2))
+            .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
+                    NextStatementIsALie.characterNames.mother,
+                    NextStatementIsALie.characterNames.mother, 0, 2))
+            .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
+                    NextStatementIsALie.characterNames.father,
+                    NextStatementIsALie.characterNames.father, 0, 2))
+            .addChoice(new Choice("Go to the Study", "GoToStudySister"))
+            .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
             .setTriggersFinalGathering(true)
             .build();
+
+    static Scene hideInTunnelGuessCousin = new Scene.Builder("HideInTunnelGuessCousin",
+            "The shoes are scuffed trainers — casual, nervous. That's the cousin.\n\n" +
+                    "You hold your breath and wait for them to leave.")
+            .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
+                    NextStatementIsALie.characterNames.cousin,
+                    NextStatementIsALie.characterNames.cousin, 2, 0))
+            .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
+                    NextStatementIsALie.characterNames.uncle,
+                    NextStatementIsALie.characterNames.uncle, 0, 2))
+            .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
+                    NextStatementIsALie.characterNames.familyFriend,
+                    NextStatementIsALie.characterNames.familyFriend, 0, 2))
+            .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
+                    NextStatementIsALie.characterNames.mother,
+                    NextStatementIsALie.characterNames.mother, 0, 2))
+            .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
+                    NextStatementIsALie.characterNames.father,
+                    NextStatementIsALie.characterNames.father, 0, 2))
+            .addChoice(new Choice("Go to the Study", "GoToStudySister"))
+            .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
+            .build();
+
+    static Scene hideInTunnelGuessFamilyFriend = new Scene.Builder("HideInTunnelGuessFamilyFriend",
+            "Clean dress shoes — polished, deliberate. An outsider trying to fit in. The family friend.\n\n" +
+                    "You hold your breath and wait for them to leave.")
+            .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
+                    NextStatementIsALie.characterNames.familyFriend,
+                    NextStatementIsALie.characterNames.familyFriend, 2, 0))
+            .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
+                    NextStatementIsALie.characterNames.uncle,
+                    NextStatementIsALie.characterNames.uncle, 0, 2))
+            .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
+                    NextStatementIsALie.characterNames.cousin,
+                    NextStatementIsALie.characterNames.cousin, 0, 2))
+            .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
+                    NextStatementIsALie.characterNames.mother,
+                    NextStatementIsALie.characterNames.mother, 0, 2))
+            .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
+                    NextStatementIsALie.characterNames.father,
+                    NextStatementIsALie.characterNames.father, 0, 2))
+            .addChoice(new Choice("Go to the Study", "GoToStudySister"))
+            .addChoice(new Choice("Go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
+            .build();
+
 
     static Scene waitInCellar = new Scene.Builder("WaitInCellar",
             "You step back and stand your ground.\n\n" +
@@ -1432,7 +1501,6 @@ public class Scene {
                     "- A fountain pen, still uncapped.")
             .addInventorySystem("revisedWill")
             .addInventorySystem("tornEnvelope")
-            .addInventorySystem("A fountain pen, still uncapped")
             .setDangerLevel(1)
             .addChoice(new Choice("Read the will carefully", "ReadWillSister"))
             .addChoice(new Choice("Force open the locked drawer", "ForceDrawer"))
@@ -1548,6 +1616,9 @@ public class Scene {
             .addKillerConditionalEffect(new Clue.KillerConditionalEffect(
                     NextStatementIsALie.characterNames.familyFriend,
                     NextStatementIsALie.characterNames.familyFriend, 0, 2))
+            .addChoice(new Choice("Accuse your father now", "Final Gathering"))
+            .addChoice(new Choice("Say nothing and go to the Final Gathering", "Final Gathering"))
+            .setTriggersFinalGathering(true)
             .build();
 
     static Scene takeRevolver = new Scene.Builder("TakeRevolver",

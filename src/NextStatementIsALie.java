@@ -533,6 +533,9 @@ public class NextStatementIsALie {
         registry.put("RecordCellarPassage", Scene.recordCellarPassage);
         registry.put("FollowCellarFootprint", Scene.followCellarFootprint);
         registry.put("HideInTunnel", Scene.hideInTunnel);
+        registry.put("HideInTunnelGuessUncle", Scene.hideInTunnelGuessUncle);
+        registry.put("HideInTunnelGuessCousin", Scene.hideInTunnelGuessCousin);
+        registry.put("HideInTunnelGuessFamilyFriend", Scene.hideInTunnelGuessFamilyFriend);
         registry.put("WaitInCellar", Scene.waitInCellar);
         registry.put("TrustCousin", Scene.trustCousin);
         registry.put("InspectBrokenGlass", Scene.inspectBrokenGlass);
