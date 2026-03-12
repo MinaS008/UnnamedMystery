@@ -138,7 +138,7 @@ public class GameState extends JFrame implements NextStatementIsALie.gameListene
         // Narrative panel
         buildNarrativePanel();
 
-        //Choicce pamel
+        //Choice pamel
         buildChoicePanel();
 
         leftPanel.add(sceneTitle, BorderLayout.NORTH);
